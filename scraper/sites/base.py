@@ -21,6 +21,9 @@ class SiteAdapter:
     base_url: str = ""
     # Start with headless Chromium instead of requests (for JS-only sites).
     prefer_browser: bool = False
+    # True if the listing's own page has a map location the results card lacks
+    # (implement detail_location). Used by pipeline.locate_listings.
+    locate_via_detail: bool = False
 
     def __init__(self):
         self.use_browser = self.prefer_browser
@@ -32,6 +35,21 @@ class SiteAdapter:
 
     def parse(self, html: str, page_url: str) -> list[Listing]:
         raise NotImplementedError
+
+    def detail_location(self, html: str) -> Optional[dict]:
+        """From a listing's own page: {"lat", "lon", "precision": "exact"|"approx",
+        "street_address"?}, or {"lat": None, "note": why} / None if it has no usable location."""
+        return None
+
+    def fetch_detail(self, fetcher: Fetcher, url: str) -> str:
+        """One listing page, same politeness as result pages. Raises Blocked/Cancelled/HTTPError."""
+        if self.blocked:
+            raise Blocked(self.blocked)
+        try:
+            return fetcher.get_rendered(url) if self.use_browser else fetcher.get(url)
+        except Blocked as e:
+            self.blocked = str(e)
+            raise
 
     def is_empty_results_page(self, html: str) -> bool:
         """True if the page legitimately has zero results (so 0 cards != JS-rendered)."""

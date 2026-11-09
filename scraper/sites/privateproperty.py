@@ -7,7 +7,7 @@ import re
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from ..core import (Listing, beds_from_title, canon_badge, clean, parse_available,
-                    parse_number, parse_price, parse_size, property_type_from)
+                    parse_number, parse_price, parse_size, plausible_za_coords, property_type_from)
 from .base import SiteAdapter
 
 ID_RE = re.compile(r"/((?:RR|T)\d+)/?(?:\?|$)")
@@ -92,6 +92,12 @@ class PrivateProperty(SiteAdapter):
             if beds is None:
                 beds = beds_from_title(title)
 
+            # Advertisers who show the property on a map get a JSON-LD geo block on the card (the
+            # listing page has the same block, so there is nothing more to fetch for PP).
+            geo = ld.get("geo") if isinstance(ld.get("geo"), dict) else {}
+            lat, lon = geo.get("latitude"), geo.get("longitude")
+            has_geo = plausible_za_coords(lat, lon)
+
             out.append(Listing(
                 site=self.name, listing_id=lid, url=url,
                 kind="rent" if lid.startswith("RR") or "/to-rent/" in url else "sale",
@@ -104,5 +110,7 @@ class PrivateProperty(SiteAdapter):
                 size_m2=parse_size(feats.get("floor size")),
                 available=available, badges=list(dict.fromkeys(badges)), agency=agency,
                 excerpt=(clean(desc.get_text(" ")) or "")[:200] or None if desc else None,
+                lat=float(lat) if has_geo else None, lon=float(lon) if has_geo else None,
+                location_precision="exact" if has_geo else None,
             ))
         return out

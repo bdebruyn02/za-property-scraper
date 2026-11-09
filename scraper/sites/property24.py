@@ -2,11 +2,13 @@
 schema.org microdata (itemprop=price content="20000")."""
 from __future__ import annotations
 
+import json
 import re
+from typing import Optional
 from urllib.parse import urlsplit, urlunsplit
 
 from ..core import (Listing, beds_from_title, canon_badge, clean, parse_available,
-                    parse_number, parse_price, parse_size, property_type_from)
+                    parse_number, parse_price, parse_size, plausible_za_coords, property_type_from)
 from .base import SiteAdapter
 
 
@@ -20,10 +22,49 @@ def _logo_id(src: str) -> str:
     return m.group(1) if m else src
 
 
+_MAP_PROPS_RE = re.compile(r'"name"\s*:\s*"GoogleMapsFactory"\s*,\s*"props"\s*:\s*')
+_LD_GEO_RE = re.compile(r'"latitude"\s*:\s*(-?\d+\.\d+)\s*,\s*"longitude"\s*:\s*(-?\d+\.\d+)')
+
+
+def _map_props(html: str) -> Optional[dict]:
+    """The listing page's map widget config: {"type": ..., "props": {latitude, longitude,
+    haveExactLocation, showLocation, streetAddress, ...}}."""
+    dec = json.JSONDecoder()
+    for m in _MAP_PROPS_RE.finditer(html):
+        try:
+            obj, _ = dec.raw_decode(html, m.end())
+        except ValueError:
+            continue
+        inner = obj.get("props") if isinstance(obj, dict) else None
+        if isinstance(inner, dict) and "latitude" in inner:
+            return inner
+    return None
+
+
 class Property24(SiteAdapter):
     name = "property24"
     domains = ("property24.com",)
     base_url = "https://www.property24.com"
+    # Results cards have no coordinates; the listing page's map widget does, with a
+    # haveExactLocation flag (verified on a live listing page, Nov 2026).
+    locate_via_detail = True
+
+    def detail_location(self, html: str) -> Optional[dict]:
+        p = _map_props(html)
+        if p and plausible_za_coords(p.get("latitude"), p.get("longitude")):
+            exact = p.get("haveExactLocation") is True and p.get("showLocation") is not False
+            out = {"lat": float(p["latitude"]), "lon": float(p["longitude"]),
+                   "precision": "exact" if exact else "approx"}
+            if exact and clean(p.get("streetAddress")):
+                out["street_address"] = clean(p["streetAddress"])
+            return out
+        # Fallback: JSON-LD on the page. It doesn't say whether the pin is exact.
+        for m in _LD_GEO_RE.finditer(html):
+            if plausible_za_coords(m.group(1), m.group(2)):
+                return {"lat": float(m.group(1)), "lon": float(m.group(2)), "precision": "approx"}
+        if '"ContactForAddressForm"' in html:     # no map; the agent gives the address on request
+            return {"lat": None, "note": "address hidden by the advertiser"}
+        return None
 
     def page_url(self, url: str, page: int) -> str:
         # .../table-view/blouberg/western-cape/11589  ->  .../11589/p2  (query string kept)

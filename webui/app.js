@@ -29,6 +29,7 @@
     $$(".tabs button").forEach(b => b.classList.toggle("active", b.dataset.tab === name));
     $$(".tab").forEach(t => t.classList.toggle("active", t.id === "tab-" + name));
     if (name === "chart") renderCharts();
+    if (name === "map" && window.MapView) window.MapView.show();
     history.replaceState(null, "", "#" + name);
   }
   $$(".tabs button").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
@@ -69,6 +70,7 @@
     renderSiteToggles();
     renderTable();
     if ($("#tab-chart").classList.contains("active")) renderCharts();
+    document.dispatchEvent(new CustomEvent("run-loaded"));
   }
 
   async function ensureAll() {
@@ -117,6 +119,7 @@
            f.max_price ? `typically, at ${rand(f.max_price)}/month` : ""),
       tile("Likely duplicates", s.possible_cross_site_duplicates ?? "–", "same unit on two sites"),
       tile("Market sample", m.points_used ?? "–", "listings with size used for the curve"),
+      tile("On the map", s.with_map_location ?? "–", s.with_map_location != null ? `of ${s.matching} matches have a map pin` : "older run: no locations"),
     ].join("");
   }
 
@@ -291,6 +294,7 @@
       await api("/api/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
         new_only: $("#optNewOnly").checked, debug: $("#optDebug").checked, no_browser: $("#optNoBrowser").checked,
         no_filters: $("#optNoFilters").checked, max_pages: mp > 0 ? mp : null,
+        no_locations: !$("#optLocate").checked,
         overrides: sessionGoal()?.overrides || null }) });
       setRunState("running"); poll();
     } catch (e) { appendLog([{ text: "Could not start: " + e.message }]); }
@@ -332,6 +336,8 @@
     $("#domains").textContent = supported_domains.join(", ");
     const body = $("#searchRows"); body.innerHTML = "";
     (config.searches || []).forEach(s => body.appendChild(searchRow(s)));
+    const nz = (f.no_go_zones || []).length;
+    $("#zoneNote").textContent = nz ? `${nz} no-go zone${nz > 1 ? "s" : ""} saved.` : "No no-go zones yet.";
     $("#runSearchList").innerHTML = (config.searches || []).filter(s => s.enabled !== false)
       .map(s => `<li>${esc(s.name)} <span class="muted">(${s.max_pages || config.max_pages || 5} pages max)</span></li>`).join("");
   }
@@ -391,7 +397,9 @@
       setSessionGoal(null); await loadSettings();
     } catch (e) { alert("Could not save: " + ((e.body && e.body.errors) || [e.message]).join("; ")); }
   });
-  window.App = { api, showTab, startRun, loadSettings, sessionGoal, setSessionGoal, getConfig: () => state.config };
+  window.App = { api, showTab, startRun, loadSettings, sessionGoal, setSessionGoal, getConfig: () => state.config,
+                 getRun: () => state.exp, ensureAll: () => state.stamp ? ensureAll() : Promise.resolve([]),
+                 rand, esc, siteColor, SITE_LABEL, SITE_ORDER };
 
   // ------------------------------------------------------------------ init
   (async function init() {

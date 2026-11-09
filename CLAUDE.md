@@ -31,14 +31,22 @@ Setup from scratch: `scripts\setup.bat` (or `scripts/setup.sh`). Always use `.ve
   The UI (`webui/onboarding.js`) calls `/api/onboarding/preview` and `/api/onboarding/apply`;
   `save=false` returns session-only `overrides` that the UI sends with `/api/run` and re-score.
   Saved answers live under `onboarding` in `searches.json`.
+- `scraper/geo.py`: no-go zones (`filters.no_go_zones`: `area` polygons, `road_side` = a traced
+  polyline + left/right of drawing direction, judged by the nearest segment, ends extended
+  indefinitely) and `zone_verdict()`. Pure maths; `webui/map.js` mirrors `side_of_road` for drawing.
+- `scraper/places.py`: Nominatim client (1 req/s, generic User-Agent, everything cached in
+  `output/places_cache.json`). Map clicks reverse-geocode at street level then search the suburb
+  name: reverse at suburb zoom returns electoral wards in Cape Town. Some suburbs are OSM points only.
 - `scraper/analysis.py`: LOESS fair-price curve, `sweet_spot()`, `score_listings()`, plus
   `METHOD` / `SCORING_NOTES` text that goes into the export.
 - `web_ui.py` + `webui/`: Flask API (one background scrape job at a time) and a no-build vanilla
   JS front end; `webui/charts.js` is a hand-rolled SVG scatter + monotone spline (no CDN).
+  `webui/map.js` is the Map tab on vendored Leaflet (`webui/vendor/leaflet`) + OSM tiles.
 - `searches.json`: user config (searches, filters, notes_for_claude, scoring keywords). The UI
   rewrites it (backup in `searches.backup.json`). Don't overwrite the user's values.
 - `output/`: runs as `listings_<stamp>.csv` + `claude_export_<stamp>.json`, `seen_ids.json`,
-  `debug/`. Generated data, git-ignored. Don't delete the user's runs.
+  `locations.json` (pins from listing pages, incl. negatives), `places_cache.json`, `debug/`.
+  Generated data, git-ignored. Don't delete the user's runs.
 
 ## Rules that must not regress
 
@@ -54,6 +62,11 @@ Setup from scratch: `scripts\setup.bat` (or `scripts/setup.sh`). Always use `.ve
   `HOW_TO_INTERPRET`, `FIELD_NOTES`, `METHOD` and/or `SCORING_NOTES` so Claude can still read it.
   Null/empty fields are dropped from export listings.
 - Unknown beds/type/size never filter a listing out; an unknown price does if a price filter is set.
+- No-go zones reject only on an `exact` pin or a suburb outline wholly inside a zone; approximate
+  pins and straddling/point-only suburbs get a "may be in no-go zone" flag; unknown location is kept.
+- Listing-page lookups (`pipeline.locate_listings`) go through the same `Fetcher`, only for new
+  listings that pass every other filter, capped (`max_location_lookups`, default 40), cached
+  forever (including "no location"), and stop on `Blocked`.
 - `size_m2` is floor size only (never erf/land); values < 10 m2 are junk -> None.
 
 ## Site quirks (as of Nov 2026)
@@ -61,14 +74,19 @@ Setup from scratch: `scripts\setup.bat` (or `scripts/setup.sh`). Always use `.ve
 - **Property24**: cards `[data-listing-number]` (skip wrappers that contain another one);
   price from `itemprop=price content`; "pro" tiles use different markup (price regex needs SA
   digit grouping, agency learned from the logo URL); `listed_by_owner.png` = private landlord.
-  Pagination `/p2` path suffix; filters in `?sp=` (e.g. `pt%3d13000`).
+  Pagination `/p2` path suffix; filters in `?sp=` (e.g. `pt%3d13000`). Results pages carry only the
+  SA centroid (-30.969313, 24.22227): ignore it. The listing page's `GoogleMapsFactory` props have
+  `latitude`/`longitude`/`haveExactLocation`/`streetAddress`; hidden-address listings have no map,
+  only `ContactForAddressForm`.
 - **Private Property**: `a.listing-result` cards with embedded JSON-LD; ID `RR…`/`T…` comes from
   the URL (`data-listing-id` is an internal number). `?page=N`; a page past the end returns 404
-  (treated as end of results). Price filter `?tp=`.
+  (treated as end of results). Price filter `?tp=`. Card JSON-LD has `geo` only when the advertiser
+  shows the address; the listing page has the same block (no need to fetch it).
 - **Gumtree**: Nuxt; decode `#__NUXT_DATA__` (devalue) and use `pinia.listings.searchResults`
   only (ignore `sponsoredResults`). URLs need a category path or the filter is dropped by a
   redirect. Results are padded with other areas; `lr`/`ls` ref prefixes do NOT mean rent/sale.
-  Parking is a type (badge), not a count. Advertisers sometimes mis-file the suburb.
+  Parking is a type (badge), not a count. Advertisers sometimes mis-file the suburb. No coordinates
+  anywhere (results or listing page): suburb only.
 - Both P24 and PP mix **per-day holiday lets** into rentals ("R 3 800 per day"): `price_period`
   handles it; `monthly_price_only` filters them.
 

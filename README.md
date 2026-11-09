@@ -68,9 +68,49 @@ The UI only listens on your own machine (127.0.0.1).
 4. **Value chart**: two charts, explained below.
    Changed a filter or keyword afterwards? **Re-score** (top right) applies the current settings
    to the selected run without scraping again, and saves it as a new run.
-5. **Claude export** (top right): download it and upload it to Claude, e.g. *"Here's today's
+5. **Map**: pick areas and mark places you never want to live (see [The map](#the-map)).
+6. **Claude export** (top right): download it and upload it to Claude, e.g. *"Here's today's
    property export. Give me your shortlist."* The file tells Claude how to read it and what to
    give back. The *Run* dropdown switches between past runs.
+
+### The map
+
+The **Map** tab uses OpenStreetMap (map data © OpenStreetMap contributors; the map library,
+Leaflet, ships with the app).
+
+- **Pick suburbs**: click anywhere in a suburb, then *Include* or *Avoid*. This edits the same
+  include/avoid lists as Settings, and the suburb's outline is drawn on the map.
+- **Draw no-go area**: click the corners of an area you never want to live in, then *Done*.
+- **Block one side of a road**: click along the road from one end to the other (follow the bends),
+  press *Done*, then click on the side you don't want. The road counts as carrying on straight
+  past both ends, so everything on that side is blocked, however far away. The shading shows
+  roughly what's covered.
+- Press **Save**, then **Re-score** to apply it to the run you're looking at. The next scrape uses
+  it too. Zones can be renamed, switched off or deleted in the list.
+
+**How listings are judged against a zone.** That depends on what's known about where a listing is:
+
+| What's known | Result |
+|---|---|
+| Exact map pin from the site, inside a zone | filtered out |
+| Approximate pin inside a zone | kept, flagged "may be in no-go zone" |
+| Suburb only, whole outline inside a zone | filtered out |
+| Suburb only, outline straddles a zone (or OpenStreetMap only has its centre, and that's inside) | kept, flagged |
+| Nothing | kept |
+
+Where the pins come from:
+- **Private Property** puts a pin on the results card when the advertiser shows the address.
+- **Property24** only shows it on the listing's own page. So after a scrape, the app opens each
+  new *matching* Property24 listing once (at most 40 a run, same 3–6 s gap). It remembers the
+  answer in `output/locations.json`, so a listing is never fetched twice. Untick *Find map
+  locations* on the Run tab (or use `--no-locations`) to skip this. Many Property24 advertisers
+  hide the address ("contact for address"), so expect pins for only part of the listings.
+- **Gumtree** gives no coordinates; its listings are judged by suburb.
+
+Suburb outlines come from OpenStreetMap's Nominatim service: at most one lookup a second, only
+for suburbs that matter, and cached in `output/places_cache.json`. Some suburbs exist in
+OpenStreetMap only as a point, never an outline. Listings in those suburbs are flagged, never
+filtered out.
 
 ### Reading the value chart
 
@@ -132,6 +172,8 @@ Each run writes to `output/`:
 | `listings_<stamp>.csv` | every scraped listing, all fields, plus `matches_filters` / `filter_reason` columns so you can see why something was dropped |
 | `claude_export_<stamp>.json` | matching listings only, compact (`property-scraper/claude-export v1`); upload this to Claude |
 | `seen_ids.json` | every listing ID ever seen, with first-seen date (drives `--new-only`) |
+| `locations.json` | map pins found on listing pages (and "none found"), so each listing is opened at most once |
+| `places_cache.json` | suburb outlines from OpenStreetMap |
 | `debug/` | page-1 HTML of each search (with `--debug`) |
 
 It also prints the 15 cheapest matches.
@@ -147,9 +189,11 @@ It also prints the 15 cheapest matches.
 | `--max-pages N` | cap on result pages per search (default: `max_pages` in config, else 5) |
 | `--no-filters` | ignore the config filters |
 | `--no-browser` | never fall back to headless Chromium |
+| `--no-locations` | don't open Property24 listing pages for map pins (cached pins still apply) |
+| `--max-location-lookups N` | cap on listing pages opened for pins per run (default: `max_location_lookups` in config, else 40) |
 | `--delay S` | minimum seconds between requests (never below 3) |
 | `--output-dir DIR` | default `output/` |
-| `--rescore STAMP` | re-apply current filters/scoring to a saved run, no scraping (same as the UI's *Re-score*) |
+| `--rescore STAMP` | re-apply current filters/scoring to a saved run, no scraping (same as the UI's *Re-score*; with no-go zones it may look up suburb outlines on OpenStreetMap) |
 | `-v` | verbose logging |
 
 Exit code is 1 if any site blocked us, so a scheduler can flag it.
@@ -167,7 +211,12 @@ Exit code is 1 if any site blocked us, so a scheduler can flag it.
     "property_types": ["Apartment", "Townhouse"],
     "include_suburbs": ["Sea Point", "Green Point", "Rondebosch"],
     "exclude_suburbs": ["Woodstock"],
-    "exclude_keywords": ["student", "airbnb"]
+    "exclude_keywords": ["student", "airbnb"],
+    "no_go_zones": [
+      {"name": "Industrial strip", "type": "area", "points": [[-33.90, 18.60], [-33.90, 18.62], [-33.92, 18.61]]},
+      {"name": "East of Main Rd", "type": "road_side", "side": "right",
+       "points": [[-33.95, 18.47], [-33.92, 18.48]]}
+    ]
   },
   "searches": [
     {"name": "P24 Sea Point", "url": "https://www.property24.com/to-rent/<suburb>/<city>/<province>/<area-id>?sp=pt%3d13000",
@@ -183,6 +232,9 @@ Filter rules:
 - `include_suburbs` / `exclude_suburbs` match on whole words in the suburb, address and title, so
   "Rondebosch" also matches "Rondebosch East". Gumtree pads its results with listings from all over
   Cape Town once local ones run out, so `include_suburbs` matters there.
+- `no_go_zones` are easiest to draw on the Map tab. `points` are `[lat, lon]`. For `road_side`,
+  `side` is left/right relative to the order the road was traced in. `"enabled": false` keeps a
+  zone but ignores it.
 - Types: Apartment, Townhouse, Simplex, Duplex, Cluster, Penthouse, Loft, Cottage, Room, House,
   Commercial, Farm, Land.
 
@@ -242,8 +294,11 @@ styling classes, and keep the generic text helpers in `scraper/core.py` (`parse_
 - **Property24**: server-rendered. Cards are `[data-listing-number]`, with `itemprop="price" content=...`
   microdata and `.p24_featureDetails[title=Bedrooms|Bathrooms|Parking Spaces|Floor Size]`.
   Promoted "pro" tiles use different markup and are handled separately. "Erf Size" is land and is ignored.
+  The listing's own page has the map pin in its map widget config (`haveExactLocation` says whether it
+  is the real address); when the advertiser hides the address there is no map at all.
 - **Private Property**: server-rendered `a.listing-result` cards with an embedded JSON-LD
   `Residence` block. The listing ID (`RR…` rent / `T…` sale) comes from the URL. A page past the last one returns 404.
+  The JSON-LD has a `geo` pin when the advertiser shows the address (the listing page adds nothing more).
 - **Gumtree**: Nuxt app. Listings come from the `__NUXT_DATA__` payload (`searchResults` only;
   sponsored ads are ignored). Parking is a type (Secure/Covered/Garage), shown as a badge.
   The `lr`/`ls` prefix of a listing ref does **not** mean rent/sale.
@@ -258,7 +313,10 @@ scraper/core.py        Listing model, text parsers, polite fetcher (+ Playwright
 scraper/sites/         one adapter per site, sharing base.py
 scraper/pipeline.py    run searches, filter, de-duplicate, outputs, Claude instructions
 scraper/analysis.py    fair-price spline (LOESS), sweet spot, value score
-webui/                 the UI's HTML/CSS/JS (no build step, works offline)
+scraper/geo.py         no-go zones: point-in-area, side-of-road, suburb-outline checks
+scraper/places.py      suburb outlines from OpenStreetMap (Nominatim), cached
+webui/                 the UI's HTML/CSS/JS (no build step; map tiles need internet)
+webui/vendor/leaflet/  Leaflet 1.9.4 map library (BSD-2), vendored
 scripts/               setup / start / daily-run helpers
 tests/                 pytest, with real pages saved under tests/fixtures/
 ```

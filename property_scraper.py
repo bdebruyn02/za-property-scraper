@@ -29,6 +29,11 @@ def main(argv=None) -> int:
     ap.add_argument("--max-pages", type=int, help="cap on result pages per search (default: config max_pages or 5)")
     ap.add_argument("--no-browser", action="store_true", help="never fall back to headless Chromium")
     ap.add_argument("--no-filters", action="store_true", help="ignore the config's filters (export everything)")
+    ap.add_argument("--no-locations", action="store_true",
+                    help="don't open Property24 listing pages to find map locations (cached ones still apply)")
+    ap.add_argument("--max-location-lookups", type=int, metavar="N",
+                    help="cap on listing pages opened for map locations per run (default: config "
+                         "max_location_lookups, else 40)")
     ap.add_argument("--delay", type=float, default=3.0, help="minimum seconds between requests (min 3)")
     ap.add_argument("--output-dir", default=str(HERE / "output"))
     ap.add_argument("--rescore", metavar="STAMP",
@@ -64,7 +69,8 @@ def main(argv=None) -> int:
 
     res = run(cfg, searches, Path(args.output_dir), new_only=args.new_only, debug=args.debug,
               max_pages=args.max_pages, allow_browser=not args.no_browser,
-              min_delay=max(3.0, args.delay), apply_filters=not args.no_filters)
+              min_delay=max(3.0, args.delay), apply_filters=not args.no_filters,
+              locate=not args.no_locations, max_location_lookups=args.max_location_lookups)
 
     print()
     print("Sites:")

@@ -21,9 +21,12 @@ from pathlib import Path
 
 from flask import Flask, abort, jsonify, request, send_from_directory
 
-from scraper import onboarding
+import requests
+
+from scraper import geo, onboarding
 from scraper.analysis import DEFAULT_SCORING
 from scraper.pipeline import HOW_TO_INTERPRET, load_config, rescore_run, run
+from scraper.places import Places
 from scraper.sites import SITES, adapter_for
 
 HERE = Path(__file__).resolve().parent
@@ -93,7 +96,8 @@ def _run_job(opts: dict):
         res = run(cfg, searches, OUTPUT, new_only=bool(opts.get("new_only")),
                   debug=bool(opts.get("debug")), max_pages=opts.get("max_pages") or None,
                   allow_browser=not opts.get("no_browser"), min_delay=3.0,
-                  apply_filters=not opts.get("no_filters"), cancel=JOB.cancel)
+                  apply_filters=not opts.get("no_filters"), cancel=JOB.cancel,
+                  locate=not opts.get("no_locations"))
         summ = res["export"]["summary"]
         JOB.result = {"stamp": res["stamp"], "matching": summ["matching"],
                       "scraped_total": summ["scraped_total"], "sites": res["site_stats"],
@@ -158,6 +162,18 @@ def _validate(cfg: dict) -> list[str]:
             errors.append(f"filters.{k} must be a number or empty")
     if f.get("min_price") and f.get("max_price") and f["min_price"] > f["max_price"]:
         errors.append("min_price is above max_price")
+    zones = f.get("no_go_zones")
+    if zones is not None:
+        if not isinstance(zones, list):
+            errors.append("filters.no_go_zones must be a list")
+        else:
+            for i, z in enumerate(zones, 1):
+                problem = geo.valid_zone(z)
+                if problem:
+                    errors.append(f"no-go zone {i} ({(z or {}).get('name') or 'unnamed'}): {problem}")
+    ml = cfg.get("max_location_lookups")
+    if ml is not None and (not isinstance(ml, int) or not 0 <= ml <= 200):
+        errors.append("max_location_lookups must be 0-200")
     mp = cfg.get("max_pages")
     if mp is not None and (not isinstance(mp, int) or not 1 <= mp <= 20):
         errors.append("max_pages must be 1-20")
@@ -307,6 +323,49 @@ def onboarding_apply():
     if replace:
         overrides["searches"] = built["searches"]
     return jsonify({"saved": False, "overrides": overrides})
+
+
+PLACES_LOCK = threading.Lock()      # one map lookup at a time (shared cache file, 1 req/s)
+
+
+def _places() -> Places:
+    return Places(OUTPUT / "places_cache.json")
+
+
+def _float_arg(name: str, lo: float, hi: float) -> float:
+    v = request.args.get(name, type=float)
+    if v is None or not lo <= v <= hi:
+        abort(400)
+    return v
+
+
+@app.get("/api/geo/at")
+def geo_at():
+    """Suburb (name + OSM outline) at a map click. OpenStreetMap Nominatim, cached, <= 1 req/s."""
+    lat, lon = _float_arg("lat", -90, 90), _float_arg("lon", -180, 180)
+    try:
+        with PLACES_LOCK:
+            place = _places().at(lat, lon)
+    except (requests.RequestException, ValueError) as e:
+        return jsonify({"error": f"OpenStreetMap lookup failed: {e}"}), 502
+    return jsonify({"place": place})
+
+
+@app.get("/api/geo/suburb")
+def geo_suburb():
+    """Outline for a suburb name near a map view (s, w, n, e)."""
+    name = (request.args.get("name") or "").strip()[:80]
+    if not name:
+        abort(400)
+    if request.args.get("anywhere"):          # first map view: where in South Africa is it?
+        bbox = (-35.0, 16.4, -22.1, 33.0)
+    else:
+        bbox = (_float_arg("s", -90, 90), _float_arg("w", -180, 180), _float_arg("n", -90, 90), _float_arg("e", -180, 180))
+        if bbox[0] >= bbox[2] or bbox[1] >= bbox[3] or bbox[2] - bbox[0] > 3 or bbox[3] - bbox[1] > 3:
+            return jsonify({"error": "zoom in further (the map view is too large to look up a suburb)"}), 400
+    with PLACES_LOCK:
+        place = _places().suburb(name, bbox)
+    return jsonify({"place": place})
 
 
 @app.get("/api/interpretation")

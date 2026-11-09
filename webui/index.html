@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Property Scraper</title>
+<link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css">
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body class="viz-root">
@@ -12,6 +13,7 @@
   <nav class="tabs" role="tablist">
     <button role="tab" data-tab="results" class="active">Results</button>
     <button role="tab" data-tab="chart">Value chart</button>
+    <button role="tab" data-tab="map">Map</button>
     <button role="tab" data-tab="run">Run scrape</button>
     <button role="tab" data-tab="settings">Settings</button>
     <button role="tab" data-tab="help">Help</button>
@@ -88,6 +90,49 @@
     <div id="sweetText" class="callout"></div>
   </section>
 
+  <!-- ======================= MAP ======================= -->
+  <section id="tab-map" class="tab">
+    <div class="maplayout">
+      <aside class="maptools">
+        <p class="muted small">Pick the suburbs you want (or want to avoid), and mark places you never want to live: draw an area, or trace a road and exclude everything on one side of it. Press <b>Save</b>, then <b>Re-score</b> (top right) to apply it to this run.</p>
+        <div class="modes" role="radiogroup" aria-label="Map tool">
+          <button type="button" class="chip on" data-mode="pan" role="radio" aria-checked="true">Move / inspect</button>
+          <button type="button" class="chip" data-mode="suburb" role="radio" aria-checked="false">Pick suburbs</button>
+          <button type="button" class="chip" data-mode="area" role="radio" aria-checked="false">Draw no-go area</button>
+          <button type="button" class="chip" data-mode="road" role="radio" aria-checked="false">Block one side of a road</button>
+        </div>
+        <div id="mapHint" class="maphint" aria-live="polite"></div>
+
+        <h3>No-go zones</h3>
+        <ul id="zoneList" class="zonelist"></ul>
+        <h3>Areas to include <span class="muted small">(empty = anywhere)</span></h3>
+        <div id="incChips" class="chips small-chips"></div>
+        <h3>Areas to avoid</h3>
+        <div id="excChips" class="chips small-chips"></div>
+
+        <div class="mapsave">
+          <button type="button" id="mapSave" class="btn">Save</button>
+          <button type="button" id="mapRevert" class="btn ghost small">Undo changes</button>
+          <span id="mapMsg" class="small"></span>
+        </div>
+
+        <h3>Listings on the map</h3>
+        <label class="small"><input type="checkbox" id="mapShowRejected"> Show filtered-out listings (grey)</label>
+        <p id="mapStats" class="muted small"></p>
+        <div class="maplegend small">
+          <span><i class="pin" style="background:var(--series-1)"></i>Property24</span>
+          <span><i class="pin" style="background:var(--series-2)"></i>Private Property</span>
+          <span><i class="pin hollow"></i>approximate location</span>
+          <span><i class="zone"></i>no-go</span>
+          <span><i class="inc"></i>include</span>
+          <span><i class="exc"></i>avoid</span>
+        </div>
+        <p class="muted small">Gumtree gives no coordinates, so its listings are judged by suburb. Map data &copy; OpenStreetMap contributors.</p>
+      </aside>
+      <div id="map" class="map" aria-label="Map of listings and no-go zones"></div>
+    </div>
+  </section>
+
   <!-- ======================= RUN ======================= -->
   <section id="tab-run" class="tab">
     <div class="runbox">
@@ -96,6 +141,7 @@
         <label><input type="checkbox" id="optDebug"> Save page-1 HTML for debugging</label>
         <label><input type="checkbox" id="optNoBrowser"> Never use the headless browser fallback</label>
         <label><input type="checkbox" id="optNoFilters"> Ignore filters (export everything)</label>
+        <label title="Property24 only shows the map location on each listing's own page. Opened once per new matching listing (max 40 a run), 3-6 s apart, and remembered."><input type="checkbox" id="optLocate" checked> Find map locations <span class="muted">(opens new matching Property24 listings, once each)</span></label>
         <label>Max pages per search <input type="number" id="optMaxPages" min="1" max="20" placeholder="config"></label>
       </div>
       <div class="runbtns">
@@ -136,6 +182,7 @@
         <label class="wide">Include areas <span class="muted">(comma or new line; empty = anywhere)</span>
           <textarea id="f_include_suburbs" rows="3"></textarea></label>
         <label class="wide">Exclude areas <textarea id="f_exclude_suburbs" rows="2"></textarea></label>
+        <p class="wide muted small">Pick areas and draw no-go zones (e.g. one side of a road) on the <a href="#map" data-goto="map">Map</a> tab. <span id="zoneNote"></span></p>
         <label class="wide">Exclude keywords <span class="muted">(title/excerpt)</span>
           <textarea id="f_exclude_keywords" rows="2"></textarea></label>
       </fieldset>
@@ -258,8 +305,10 @@
   </div>
 </div>
 
+<script src="/static/vendor/leaflet/leaflet.js"></script>
 <script src="/static/charts.js"></script>
 <script src="/static/app.js"></script>
 <script src="/static/onboarding.js"></script>
+<script src="/static/map.js"></script>
 </body>
 </html>

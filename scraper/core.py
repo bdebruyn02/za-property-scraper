@@ -43,6 +43,11 @@ class Listing:
     excerpt: Optional[str] = None       # short description snippet from the card
     search: Optional[str] = None        # name of the search that found it
     dupe_of: Optional[str] = None       # "site:id" of a likely cross-site duplicate
+    # map location: from the results card (Private Property JSON-LD) or the listing's own page
+    # (Property24); see pipeline.locate_listings. precision "exact" | "approx".
+    lat: Optional[float] = None
+    lon: Optional[float] = None
+    location_precision: Optional[str] = None
     # filled in by analysis.py
     fair_price: Optional[int] = None    # what the market curve says this listing "should" cost
     value_pct: Optional[int] = None     # % below fair price (+ = cheaper than market)
@@ -208,6 +213,18 @@ def finalise(li: "Listing") -> "Listing":
         li.bedrooms = beds_from_title(li.title)
     li.badges = list(dict.fromkeys(b for b in li.badges if b))
     return li
+
+
+def plausible_za_coords(lat, lon) -> bool:
+    """Inside South Africa's rough bounding box, and not the country centroid Property24 puts on
+    every results page (-30.969313, 24.22227)."""
+    try:
+        lat, lon = float(lat), float(lon)
+    except (TypeError, ValueError):
+        return False
+    if abs(lat - -30.969313) < 1e-4 and abs(lon - 24.22227) < 1e-4:
+        return False
+    return -35.5 <= lat <= -21.5 and 16.0 <= lon <= 33.5
 
 
 def looks_like_captcha(html: str) -> bool:

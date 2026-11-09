@@ -12,8 +12,12 @@ from collections import Counter
 from pathlib import Path
 from typing import Optional
 
+import requests
+
+from . import geo
 from .analysis import build_market, score_listings, scoring_notes
-from .core import Fetcher, Listing
+from .core import Blocked, Cancelled, Fetcher, Listing
+from .places import Places
 from .sites import SITES, adapter_for
 
 log = logging.getLogger("scraper")
@@ -39,6 +43,12 @@ South African property sites (Property24, Private Property, Gumtree). Read it li
 7. suburb is what the site reports. Gumtree advertisers sometimes file ads under the wrong area, so
    if the title or excerpt names a different suburb (e.g. suburb "Milnerton" but "...in Kensington"),
    trust the text and say so.
+8. filters_applied.no_go_zones (if present) are places on the map I never want to live: drawn
+   areas, or everything on one side of a road. Listings known to be inside one were already
+   removed. A flag starting "may be in no-go zone" means the location is only approximate or
+   only the suburb is known: treat it as a real risk, and say which address to confirm. lat/lon
+   and location describe where a listing is (see field_notes); listings without them are placed
+   by suburb only.
 
 What I want back:
 - A ranked shortlist of the best 5-10 properties for value AND fit with my notes. For each: price,
@@ -63,7 +73,13 @@ FIELD_NOTES = (
     "things like 'secure complex', pets, furnished. dupe_of points to the earlier listing on another "
     "site with the same price, beds and suburb (and floor size within 3 m2 when both are known): "
     "probably the same unit listed twice. Unknown beds/type/size never cause a listing to be "
-    "filtered out; an unknown price does when a price filter is set."
+    "filtered out; an unknown price does when a price filter is set. "
+    "lat/lon (WGS84) is the site's own map pin: from the Private Property results card, or from the "
+    "Property24 listing page. location is 'exact' when the site says the pin is the actual address "
+    "(Property24 'haveExactLocation'; Private Property only publishes a pin when the advertiser "
+    "shows the address) and 'approx' when it is only roughly placed. Gumtree gives no coordinates. "
+    "No-go zones reject a listing only on an exact pin, or when its whole suburb outline "
+    "(OpenStreetMap) is inside the zone; an unknown location never filters a listing out."
 )
 
 
@@ -95,8 +111,22 @@ def _contains_any(text: str, needles: list[str]) -> Optional[str]:
     return None
 
 
-def reject_reason(li: Listing, f: dict) -> Optional[str]:
-    """None if the listing passes the filters, else a short reason."""
+def zone_check(li: Listing, f: dict, suburb_places: Optional[dict] = None) -> Optional[tuple[str, str]]:
+    """No-go zone verdict for one listing: ('reject', reason) | ('flag', text) | None."""
+    zones = geo.active_zones(f)
+    if not zones:
+        return None
+    place = (suburb_places or {}).get(_norm(li.suburb)) if li.suburb else None
+    return geo.zone_verdict(li.lat, li.lon, li.location_precision, place, zones)
+
+
+def without_zones(f: dict) -> dict:
+    return {k: v for k, v in f.items() if k != "no_go_zones"}
+
+
+def reject_reason(li: Listing, f: dict, suburb_places: Optional[dict] = None) -> Optional[str]:
+    """None if the listing passes the filters, else a short reason. suburb_places
+    (norm suburb -> places.Places result) lets no-go zones judge listings without a map pin."""
     if f.get("kind") and li.kind and li.kind != f["kind"]:
         return f"kind={li.kind}"
     if f.get("monthly_price_only", True) and li.kind == "rent" and li.price_period not in (None, "month"):
@@ -128,7 +158,124 @@ def reject_reason(li: Listing, f: dict) -> Optional[str]:
     kw = _contains_any(" ".join(x for x in (li.title, li.excerpt) if x), f.get("exclude_keywords") or [])
     if kw:
         return f"keyword '{kw}'"
+    v = zone_check(li, f, suburb_places)
+    if v and v[0] == "reject":
+        return v[1]
     return None
+
+
+def filter_rows(listings: list[Listing], f: dict, suburb_places: Optional[dict],
+                is_new: dict[str, bool]) -> list[tuple[Listing, Optional[str], bool]]:
+    """(listing, reject reason, is_new) for each listing. Call after scoring: adds the
+    'may be in no-go zone' flag to listings that pass (scoring resets flags)."""
+    rows = []
+    for li in listings:
+        reason = reject_reason(li, f, suburb_places)
+        if reason is None:
+            v = zone_check(li, f, suburb_places)
+            if v and v[0] == "flag" and v[1] not in li.flags:
+                li.flags.append(v[1])
+        rows.append((li, reason, is_new.get(li.key, False)))
+    return rows
+
+
+# --------------------------------------------------------------------------- locations
+def _load_json(path: Path) -> dict:
+    if path.exists():
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except ValueError:
+            log.warning("Could not read %s - starting afresh", path)
+    return {}
+
+
+def _apply_location(li: Listing, loc: dict):
+    if loc.get("lat") is None or li.lat is not None:
+        return
+    li.lat, li.lon, li.location_precision = loc["lat"], loc["lon"], loc.get("precision") or "approx"
+    if not li.address and loc.get("street_address"):
+        li.address = loc["street_address"]
+
+
+def locate_listings(all_listings: list[Listing], candidates: list[Listing], adapters: dict,
+                    fetcher: Optional[Fetcher], cache_path: Path, max_lookups: int = 40) -> int:
+    """Give listings a map pin. Every listing gets any cached location; then, if a fetcher is
+    given, up to max_lookups `candidates` from sites with locate_via_detail have their own page
+    fetched (sequentially, same politeness as result pages). Results, including 'no location
+    on the page', are cached in cache_path so a listing is fetched at most once ever.
+    Returns the number of pages fetched."""
+    cache = _load_json(cache_path)
+    for li in all_listings:
+        if li.key in cache:
+            _apply_location(li, cache[li.key])
+    if fetcher is None or max_lookups <= 0:
+        return 0
+    todo = [li for li in candidates if li.lat is None and li.key not in cache
+            and getattr(adapters.get(li.site), "locate_via_detail", False)]
+    if not todo:
+        return 0
+    if len(todo) > max_lookups:
+        log.info("Locations: %d listings need a page lookup; doing the first %d this run "
+                 "(the rest next time).", len(todo), max_lookups)
+        todo = todo[:max_lookups]
+    log.info("Looking up map locations on %d listing pages (one at a time; cached for next time)...", len(todo))
+    fetched, today = 0, dt.date.today().isoformat()
+    try:
+        for i, li in enumerate(todo, 1):
+            ad = adapters[li.site]
+            if ad.blocked:
+                continue
+            try:
+                html = ad.fetch_detail(fetcher, li.url)
+            except Blocked as e:
+                log.error("  BLOCKED by %s on a listing page: %s - no more lookups there.", li.site, e)
+                continue
+            except requests.HTTPError as e:
+                if getattr(e.response, "status_code", None) in (404, 410):
+                    cache[li.key] = {"lat": None, "checked": today, "note": "listing page gone"}
+                else:
+                    log.warning("  %s - skipping", e)
+                continue
+            except requests.RequestException as e:
+                log.warning("  network error (%s) - skipping", e)
+                continue
+            fetched += 1
+            loc = ad.detail_location(html) or {"lat": None}
+            cache[li.key] = dict(loc, checked=today)
+            _apply_location(li, loc)
+            log.info("  [%d/%d] %s: %s", i, len(todo), li.key,
+                     f"{loc['precision']} location" if loc.get("lat") is not None
+                     else loc.get("note") or "no location on the page")
+    except Cancelled:
+        log.warning("  location lookups stopped by user")
+    finally:
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        cache_path.write_text(json.dumps(cache, indent=0, sort_keys=True), encoding="utf-8")
+    return fetched
+
+
+def lookup_suburbs(candidates: list[Listing], filters: dict, places: Places, cancel=None) -> dict:
+    """Suburb outlines (OpenStreetMap) for candidates without an exact pin, so no-go zones can
+    judge them. Only needed - and only looked up - when zones are set. norm suburb -> place."""
+    zones = geo.active_zones(filters)
+    if not zones:
+        return {}
+    bbox = geo.zones_bbox(zones)
+    names: dict[str, str] = {}            # norm -> first spelling seen
+    for li in candidates:
+        if li.suburb and li.location_precision != "exact" and _norm(li.suburb):
+            names.setdefault(_norm(li.suburb), li.suburb)
+    out: dict = {}
+    before = places.lookups
+    for name in names.values():
+        if cancel is not None and cancel.is_set():
+            break
+        place = places.suburb(name, bbox)
+        if place:
+            out[_norm(name)] = place
+    if places.lookups > before:
+        log.info("Looked up %d suburb outlines on OpenStreetMap (cached for next time).", places.lookups - before)
+    return out
 
 
 # --------------------------------------------------------------------------- duplicates
@@ -175,7 +322,8 @@ def save_seen(path: Path, seen: dict, listings: list[Listing], today: str):
 CSV_FIELDS = ["site", "listing_id", "url", "kind", "title", "price", "price_text", "price_period",
               "suburb", "address", "property_type", "bedrooms", "bathrooms", "parking", "size_m2",
               "available", "badges", "agency", "excerpt", "search", "dupe_of",
-              "score", "value_pct", "fair_price", "flags", "is_new", "matches_filters", "filter_reason"]
+              "score", "value_pct", "fair_price", "flags", "is_new", "matches_filters", "filter_reason",
+              "lat", "lon", "location_precision"]
 
 
 def _num(v):
@@ -207,8 +355,20 @@ def export_listing(li: Listing) -> dict:
         "size_m2": _num(li.size_m2), "available": li.available, "badges": li.badges,
         "agency": li.agency, "score": li.score, "value_pct": li.value_pct, "fair_price": li.fair_price,
         "flags": li.flags, "excerpt": li.excerpt, "dupe_of": li.dupe_of, "url": li.url,
+        "lat": round(li.lat, 6) if li.lat is not None else None,
+        "lon": round(li.lon, 6) if li.lon is not None else None,
+        "location": li.location_precision if li.lat is not None else None,
     }
     return {k: v for k, v in d.items() if v not in (None, "", [])}
+
+
+def export_filters(filters: dict) -> dict:
+    """filters_applied for the export: zones as names/descriptions instead of raw coordinates."""
+    out = without_zones(filters)
+    zones = geo.active_zones(filters)
+    if zones:
+        out["no_go_zones"] = [geo.describe_zone(z) for z in zones]
+    return out
 
 
 def build_export(cfg: dict, searches: list[dict], filters: dict, new_only: bool,
@@ -221,7 +381,7 @@ def build_export(cfg: dict, searches: list[dict], filters: dict, new_only: bool,
         "generated_at": dt.datetime.now().astimezone().isoformat(timespec="seconds"),
         "notes_for_claude": cfg.get("notes_for_claude", ""),
         "searches": [{"name": s["name"], "url": s["url"]} for s in searches],
-        "filters_applied": filters,
+        "filters_applied": export_filters(filters),
         "new_only": new_only,
         "summary": {
             "scraped_total": len(scraped),
@@ -232,6 +392,7 @@ def build_export(cfg: dict, searches: list[dict], filters: dict, new_only: bool,
             "price_median": int(statistics.median(prices)) if prices else None,
             "price_max": prices[-1] if prices else None,
             "possible_cross_site_duplicates": sum(1 for li in matching if li.dupe_of),
+            "with_map_location": sum(1 for li in matching if li.lat is not None),
             "sites": site_stats or {},
         },
         "market": market or {},
@@ -261,9 +422,12 @@ def console_table(matching: list[Listing], n: int = 15) -> str:
 # --------------------------------------------------------------------------- run
 def run(cfg: dict, searches: list[dict], out_dir: Path, *, new_only: bool = False,
         debug: bool = False, max_pages: Optional[int] = None, allow_browser: bool = True,
-        min_delay: float = 3.0, apply_filters: bool = True, cancel=None) -> dict:
+        min_delay: float = 3.0, apply_filters: bool = True, cancel=None,
+        locate: bool = True, max_location_lookups: Optional[int] = None) -> dict:
     out_dir.mkdir(parents=True, exist_ok=True)
     filters = cfg.get("filters", {}) if apply_filters else {}
+    if max_location_lookups is None:
+        max_location_lookups = int(cfg.get("max_location_lookups", 40))
     default_pages = max_pages or cfg.get("max_pages", 5)
     searches = [s for s in searches if s.get("enabled", True)]
     fetcher = Fetcher(min_delay=min_delay, max_delay=min_delay + 3, allow_browser=allow_browser,
@@ -292,23 +456,36 @@ def run(cfg: dict, searches: list[dict], out_dir: Path, *, new_only: bool = Fals
             st["browser"] = ad.use_browser
             for li in found:
                 scraped.setdefault(li.key, li)
+
+        seen_path = out_dir / "seen_ids.json"
+        seen = load_seen(seen_path)
+        listings = list(scraped.values())
+        is_new = {li.key: li.key not in seen for li in listings}
+        in_output = [li for li in listings if is_new[li.key] or not new_only]
+        # Only listings that pass every other filter are worth a page lookup or a suburb outline.
+        candidates = [li for li in in_output if reject_reason(li, without_zones(filters)) is None]
+        lookups = locate_listings(listings, candidates, adapters,
+                                  fetcher if locate and not fetcher.cancelled else None,
+                                  out_dir / "locations.json", max_location_lookups)
+        for name, ad in adapters.items():
+            st = site_stats[name]
+            st["blocked"] = st["blocked"] or ad.blocked
+            st["matching_with_map_location"] = sum(1 for li in candidates if li.site == name and li.lat is not None)
+        if lookups:
+            log.info("Fetched %d listing pages for map locations.", lookups)
     finally:
         fetcher.close()
 
-    listings = list(scraped.values())
+    suburb_places = {}
+    if geo.active_zones(filters) and not fetcher.cancelled:
+        suburb_places = lookup_suburbs(candidates, filters, Places(out_dir / "places_cache.json"), cancel)
+
     mark_cross_site_duplicates(listings)
     market = build_market(listings, cfg.get("filters", {}))
     score_listings(listings, market, cfg.get("scoring"))
 
-    seen_path = out_dir / "seen_ids.json"
-    seen = load_seen(seen_path)
     today = dt.date.today().isoformat()
-    rows = []
-    for li in listings:
-        is_new = li.key not in seen
-        if new_only and not is_new:
-            continue
-        rows.append((li, reject_reason(li, filters), is_new))
+    rows = filter_rows(in_output, filters, suburb_places, is_new)
     save_seen(seen_path, seen, listings, today)
 
     out = write_outputs(cfg, searches, filters, new_only, rows, market, site_stats, out_dir)
@@ -346,21 +523,32 @@ def _listing_from_csv(r: dict) -> Listing:
         property_type=r.get("property_type") or None, bedrooms=f("bedrooms"), bathrooms=f("bathrooms"),
         parking=f("parking"), size_m2=f("size_m2"), available=r.get("available") or None,
         badges=[b for b in (r.get("badges") or "").split("; ") if b], agency=r.get("agency") or None,
-        excerpt=r.get("excerpt") or None, search=r.get("search") or None)
+        excerpt=r.get("excerpt") or None, search=r.get("search") or None,
+        lat=f("lat"), lon=f("lon"), location_precision=r.get("location_precision") or None)
 
 
-def rescore_run(cfg: dict, stamp: str, out_dir: Path, apply_filters: bool = True) -> dict:
-    """Re-apply the current filters and scoring to a saved run (no network). Writes a new run."""
+def rescore_run(cfg: dict, stamp: str, out_dir: Path, apply_filters: bool = True,
+                online_places: bool = True) -> dict:
+    """Re-apply the current filters and scoring to a saved run. Never contacts the property
+    sites; map locations come from the CSV and output/locations.json. If no-go zones are set,
+    missing suburb outlines are looked up on OpenStreetMap (unless online_places=False).
+    Writes a new run."""
     with (out_dir / f"listings_{stamp}.csv").open(encoding="utf-8-sig") as fh:
         raw = list(csv.DictReader(fh))
     old = json.loads((out_dir / f"claude_export_{stamp}.json").read_text(encoding="utf-8"))
     listings = [_listing_from_csv(r) for r in raw]
     is_new = {f"{r['site']}:{r['listing_id']}": r.get("is_new") == "yes" for r in raw}
+    filters = cfg.get("filters", {}) if apply_filters else {}
+    locate_listings(listings, [], {}, None, out_dir / "locations.json")     # cache only
+    suburb_places = {}
+    if geo.active_zones(filters):
+        candidates = [li for li in listings if reject_reason(li, without_zones(filters)) is None]
+        suburb_places = lookup_suburbs(candidates, filters,
+                                       Places(out_dir / "places_cache.json", online=online_places))
     mark_cross_site_duplicates(listings)
     market = build_market(listings, cfg.get("filters", {}))
     score_listings(listings, market, cfg.get("scoring"))
-    filters = cfg.get("filters", {}) if apply_filters else {}
-    rows = [(li, reject_reason(li, filters), is_new.get(li.key, False)) for li in listings]
+    rows = filter_rows(listings, filters, suburb_places, is_new)
     site_stats = (old.get("summary") or {}).get("sites") or {}
     out = write_outputs(cfg, old.get("searches") or [], filters, bool(old.get("new_only")), rows,
                         market, site_stats, out_dir)

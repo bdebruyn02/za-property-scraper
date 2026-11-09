@@ -1,0 +1,2333 @@
+
+
+<!DOCTYPE html>
+<!--[if IE]><html class=" p24_live p24_outdatedBrowser"><![endif]-->
+<!--[if !IE]><!-->
+<html class=" p24_live" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!--<![endif]-->
+
+<head>
+    
+<script>
+    window.loader = {
+        siteLoaded: false,
+        callbacks: [],
+        renderComponent: null, // set during onSiteLoaded
+
+        addCallback: function (callback) {
+            if (this.siteLoaded) {
+                callback(this.renderComponent);
+            } else {
+                this.callbacks.push(callback);
+            }
+        },
+
+        onSiteLoaded: function (renderComponent) {
+            this.renderComponent = renderComponent;
+            this.siteLoaded = true;
+
+            this.callbacks.forEach(callback => {
+                callback(this.renderComponent);
+            });
+            this.callbacks = [];
+        }
+    }
+
+    window.addCallback = function (callback) {
+        window.loader.addCallback(callback);
+    }
+
+    window.bundleContext = {"jQueryPrettyPhotoUrl":"/bundles/assets/ce309f4b5707.js","jQuerySmartCarouselUrl":"/bundles/assets/0d15ed8ab0b4.js"};
+</script>
+
+<script type="text/javascript">
+    window.clientAjaxActive = 0;
+    window.settings = {"isSmartphone":false,"inDevelopment":false,"isRecaptchaEnabled":true,"reCaptchaSiteKey":"REDACTED_RECAPTCHA_SITE_KEY","isUserLoggedIn":false,"applicationInsights":{"connectionString":"InstrumentationKey=d550bd73-e08b-4504-87e0-a62dc8835175;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/;ApplicationId=f9163f9a-ba0a-4b0b-8e66-863fa1a682d9","operationId":"908ed5b687eb2ad3b08bd8037cad3a8f","operationName":"GET Listing/ListingView","webInterface":"Desktop","appVersion":"51.8.966.0","isEnabled":true},"npsEnabled":true,"enableLaquesisExperiment":true,"getPageInitData":true,"activeUser":false};
+</script>
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/bundles/assets/jzn1l7h4qpby.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/bundles/assets/h4kwxlnroa3r.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/bundles/assets/df719djy3kux.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/bundles/assets/fg3rwalyo1ij.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/bundles/assets/jo0928uqr31v.woff2" />
+
+
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://dc.services.visualstudio.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript">
+        window.antiForgeryToken = 'REDACTED_TOKEN';
+    </script>
+    <script src="/bundles/assets/laln69e55eww.js" type="module"></script>
+<link rel="modulepreload" href="/bundles/assets/n3y4dgzgm8l6.js" />
+<link rel="modulepreload" href="/bundles/assets/cla5bno69izk.js" />
+    <link rel="stylesheet" href="/bundles/assets/kn7fu7dk71e1.css"></link><link rel="stylesheet" href="/bundles/assets/nqbbcg6l3y62.css" />
+
+
+
+
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) }; t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, document, "clarity", "script", "lbu6kh4bm0");
+
+                                            addCallback(function () {
+                                                            window.clarity("set", "Listing Type", "Rental");
+                                            });
+                            
+
+                                                    addCallback(function () {
+                                                                    window.clarity("set", "Template", "Listing/ListingView");
+                                                    });
+                                
+
+                                                    addCallback(function () {
+                                                                    window.clarity("set", "UI Context Name", "Property24 Desktop");
+                                                    });
+                                
+
+                                                    addCallback(function () {
+                                                                    window.clarity("set", "User Status", "NotLoggedIn");
+                                                    });
+                                
+
+        addCallback(function () {
+            window.clarity("identify", "2qltujb0octo04fulwx5mk3l", undefined, "listing/listingview");
+        });
+</script>
+
+    
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        var ninjaTag = document.getElementById("ninja-script-tag");
+        if (!ninjaTag) {
+            (function () {
+                "use strict";
+                window.configTracking = {
+                    siteUrl: "www.property24.com",
+                    environment: "production",
+                    platform: window.settings.isSmartphone ? "m" : "d",
+					disablePropertyPropagation: true,
+					disableDefaultTrackPage: true,
+                };
+                var script = document.createElement("script");
+                script.type = "text/javascript";
+                script.id = "ninja-script-tag";
+                script.async = true;
+                script.src = ("https:" === document.location.protocol ? "https://" : "http://") + "ninja.data.olxcdn.com/ninja-property24.js";
+                (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(script);
+            }());
+        }
+
+		window.ninjaSettings = {"enabled":true,"pageName":"listing_listingview","customProperties":{"x-template":"Listing/ListingView","user_status":"Logged out","ui_context_name":"Property24 Desktop","listing_type":"Rental"}};
+    </script>
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LS4VP2QVQS&l=gaDataLayer"></script>
+<script>
+	window.gaDataLayer = window.gaDataLayer || [];
+	function gtag(){gaDataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LS4VP2QVQS', {"traffic_type":"Live","user_id":"2qltujb0octo04fulwx5mk3l","template":"Listing/ListingView","user_status":"NotLoggedIn","ui_context_name":"Property24 Desktop","listing_type":"Rental"});
+
+    window.enabledPageLoadTimeLogging = true
+</script>
+
+
+
+    
+
+
+<meta property="al:ios:url" content="https://www.property24.com/to-rent/table-view/blouberg/western-cape/11589/117661901" />
+<meta property="al:ios:app_store_id" content="486012121" />
+<meta property="al:ios:app_name" content="Property24.com" />
+
+
+<script type="text/javascript">
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+
+    (function () {
+        var gads = document.createElement('script');
+        gads.async = true;
+        gads.type = 'text/javascript';
+
+        gads.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+
+        var node = document.getElementsByTagName('script')[0];
+        node.parentNode.insertBefore(gads, node);
+    })();
+</script>
+
+<script type="text/javascript">
+    googletag.cmd.push(function () {
+googletag.defineSlot("/181213734/Property24/Web/Property24/Calculator/P24_Leaderboard550x70", [[550,70]], "div-gpt-ad-1641985752427-0").addService(googletag.pubads());
+googletag.defineSlot("/181213734/Property24/Web/Property24/Calculator/Calculator_Model_2026_Refresh_Desktop", [[692,101]], "div-gpt-ad-1768469162271-0").addService(googletag.pubads());
+googletag.defineSlot("/181213734/Property24/Web/Property24/Insurance_Desktop", [[657,100]], "div-gpt-ad-1634300091782-0").addService(googletag.pubads());
+googletag.pubads().setTargeting("userType", "NotLoggedIn");
+
+            googletag.pubads().enableSingleRequest();
+        googletag.pubads().collapseEmptyDivs();
+        googletag.enableServices();
+    });
+</script>
+
+   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"GoogleDFP","props":{"handleInlineDFPLoading":false,"disableOffsetScrolling":false},"type":"c"}));
+   </script>
+
+    <script>window.listingLeadFormContext = {"isPrivateListing":false,"listingType":1,"countryId":1,"listingNumber":{"number":117661901,"isValid":true},"canShowAgentContactNumber":true,"canShowAgentContactWhatsApp":true,"canAgentReceiveMessages":true,"agencyName":"RE/MAX Property Associates - Western Cape","agentSingular":"Agent","agentSingularOrPlural":"Agent","numberSingularOrPlural":"Number","addressSingularOrPlural":"Address","agentDetails":[{"id":3866,"name":"Julius Illyes","published":true,"imageURL":"https://images.prop24.com/120986503/UpperCrop200x200","profileURL":"/estate-agents/re-max-property-associates-western-cape/julius-illyes/3866","profileTitle":"Agent profile for Julius Illyes","hasContactNumber":true,"canShowWhatsApp":true,"token":{"countryId":1,"listingNumber":{"number":117661901,"isValid":true},"agentId":3866},"tokenString":"u3wlesy2w52ysmk6dpqd6hnbixzm4kca65vdans7q4oydtmsujjbz4fusjllavujedtnjxivjsr4ssc4ummvsvt7as6xpinlachxwja"}],"primaryAgent":{"id":3866,"name":"Julius Illyes","published":true,"imageURL":"https://images.prop24.com/120986503/UpperCrop200x200","profileURL":"/estate-agents/re-max-property-associates-western-cape/julius-illyes/3866","profileTitle":"Agent profile for Julius Illyes","hasContactNumber":true,"canShowWhatsApp":true,"token":{"countryId":1,"listingNumber":{"number":117661901,"isValid":true},"agentId":3866},"tokenString":"u3wlesy2w52ysmk6dpqd6hnbixoa6a22wxkzdrdzlgaleirb2nozaxfkehf67yosizfawrs5ni2g22flzr2xhsvaqcaqjewzz3shaii"},"maxMessageLength":600,"maxMessageLengthValidationMessage":"Message length cannot exceed 600 characters.","clientMobileNumberValidationPattern":"^(?!.{21,})\\s*?(\\\u002B\\s*?2\\s*?7\\s*?\\(\\s*?0\\s*?\\)|\\\u002B\\s*?2\\s*?7|2\\s*?7|0)\\s*?(((5(?:0|1|2)\\s*?|6(?:0|1|2|3|4|5|6|7|8|9)\\s*?|7(?:0|1|2|3|4|5|6|7|8|9)\\s*?|8\\s*?(?:1|2|3|4))\\s*?((?:\\d\\s*?){7}))|((9600000|9600304|9600305|9600306|9600307|9602001|9602002|9602005|9602006|9602007|9602010|9602011|9603000|9603001|9603002|9603003|9609802|9609803)((?:\\d\\s*?){2}))|((96003015|96003016|96003017|96003018|96003019)((?:\\d\\s*?){1})))$"};</script>
+
+    <title>2 Bedroom Apartment / flat to rent in Table View - P24-117661901</title>
+
+<meta name="description" content="2 bedroom Property to rent in Table View, Blouberg for R 13 000 by RE/MAX Property Associates - Western Cape. Located on North road, walking distance to stores and the bus stop.&#xD;&#xA;Exceptionally neat 2 bedroom 1s ... Property24.com" />
+    <link rel="canonical" href="https://www.property24.com/to-rent/table-view/blouberg/western-cape/11589/117661901" />
+<meta property="fb:app_id" content="159786687457759" />
+<meta property="og:title" content="2 Bedroom Apartment / flat to rent in Table View - Blouberg - Property24" />
+<meta property="og:description" content="Located on North road, walking distance to stores and the bus stop." />
+
+<meta property="og:image" content="https://images.prop24.com/382900703" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1620" />
+<meta property="og:image:height" content="1080" />
+
+    <meta property="og:url" content="https://www.property24.com/to-rent/table-view/blouberg/western-cape/11589/117661901" />
+
+<meta name="twitter:card" content="summary_large_image" />
+
+
+    <script type="application/ld&#x2B;json">
+        {"@context":"https://schema.org","@graph":[{"@type":"RealEstateListing","breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":"https://www.property24.com/to-rent","name":"Property to Rent"},{"@type":"ListItem","position":2,"item":"https://www.property24.com/to-rent/western-cape/9","name":"Western Cape"},{"@type":"ListItem","position":3,"item":"https://www.property24.com/to-rent/blouberg/western-cape/658","name":"Blouberg"},{"@type":"ListItem","position":4,"item":"https://www.property24.com/to-rent/table-view/blouberg/western-cape/11589","name":"Table View"},{"@type":"ListItem","position":5,"item":"https://www.property24.com/to-rent/table-view/blouberg/western-cape/11589/117661901","name":"Web Ref: 117661901"}]},"about":{"@type":"Apartment","numberOfBedrooms":2,"numberOfBathroomsTotal":1,"floorSize":{"@type":"QuantitativeValue","value":56,"unitCode":"MTK"},"address":{"@type":"PostalAddress","addressLocality":"Table View","addressRegion":"Western Cape","addressCountry":"South Africa"},"description":"Apartment / Flat"},"offers":{"@type":"Offer","priceSpecification":{"@type":"UnitPriceSpecification","price":"13000","priceCurrency":"ZAR","unitCode":"MON"},"offeredBy":{"@type":"Person","worksFor":{"@type":"RealEstateAgent","logo":"https://images.prop24.com/362885401/Fit450x225","name":"RE/MAX Property Associates - Western Cape","url":"https://www.property24.com/estate-agents/re-max-property-associates-western-cape/8454"},"name":"Julius Illyes","url":"https://www.property24.com/estate-agents/re-max-property-associates-western-cape/julius-illyes/3866"},"url":"https://www.property24.com/to-rent/table-view/blouberg/western-cape/11589/117661901"},"description":"Ideally located ","image":"https://images.prop24.com/382900703/Ensure960x540","name":"2 Bedroom Apartment / flat to rent in Table View","url":"https://www.property24.com/to-rent/table-view/blouberg/western-cape/11589/117661901"}]}
+    </script>
+
+
+    <link rel="icon" type="image/png" sizes="57x57" href="/Content/images/Optimized/TouchIcons/Icon_57x57.png?z=5d61e61c3b21f036f855" />
+    <link rel="icon" type="image/png" sizes="144x144" href="/Content/images/Optimized/TouchIcons/Icon_144x144.png?z=a11e5a0924be7d93b93b" />
+    <link rel="icon" type="image/png" sizes="152x152" href="/Content/images/Optimized/TouchIcons/Icon_152x152.png?z=6dac7c360aba7b7a8c12" />
+    <link rel="icon" type="image/png" sizes="180x180" href="/Content/images/Optimized/TouchIcons/Icon_180x180.png?z=b8f47719917531a11a86" />
+
+    <link rel="apple-touch-icon" href="/Content/images/Optimized/TouchIcons/Icon_57x57.png?z=5d61e61c3b21f036f855" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/Content/images/Optimized/TouchIcons/Icon_72x72.png?z=efb43065a6414e844b80" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/Content/images/Optimized/TouchIcons/Icon_76x76.png?z=efb43065a6414e844b80" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/Content/images/Optimized/TouchIcons/Icon_114x114.png?z=5156f0000ddbb6e4218d" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/Content/images/Optimized/TouchIcons/Icon_120x120.png?z=f774ccf66eb9131dd712" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/Content/images/Optimized/TouchIcons/Icon_144x144.png?z=a11e5a0924be7d93b93b" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/Content/images/Optimized/TouchIcons/Icon_152x152.png?z=6dac7c360aba7b7a8c12" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/Content/images/Optimized/TouchIcons/Icon_180x180.png?z=b8f47719917531a11a86" />
+    <script>window.leadFormUserContext = {"leadContactMobileNumberAttributes":{"id":"","class":"form-control","placeholder":"Your Mobile Number"},"leadContactEmailAttributes":{"id":"","class":"form-control","autocomplete":"off","placeholder":"Your Email"},"isAdminLead":false,"userCanEditMobileNumber":true,"userCanEditEmail":true};</script>
+</head>
+<body>
+    <div class="p24_theme">
+            <div class="js_ie8_message p24_outdatedMessage">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            Please note that you are using an outdated browser which is not compatible with some elements of the site.
+                            We strongly urge you to update to <a href="https://www.microsoft.com/en-us/edge" title="Download Edge" target="_blank" rel="noopener noreferrer">Edge</a> for an optimal browsing experience.
+                        </div>
+                    </div>
+                </div>
+                <i class="js_ie8_dismiss fa fa-times"></i>
+            </div>
+
+
+        
+
+<nav class="navbar">
+    <div class="p24_nav-container">
+        <!-- Header -->
+        <header class="navbar-header">
+            <a href="/" title="Property to rent: Houses to rent: Property24" class="navbar-brand">
+                <img src="/Content/images/Optimized/Logos/property24_logo.svg?z=2cd369fe7776a4beed13" alt="Property to rent: Houses to rent: Property24" />
+            </a>
+        </header>
+
+        <!-- Navbar Links -->
+<ul class="nav navbar-nav">
+        <li class="dropdown full-width">
+            <a href="/for-sale" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Buy</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="p24_heading">Looking to Buy?</p>
+                                                    <p>
+                                                        <a href="/for-sale/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Property for Sale in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/commercial-property-for-sale/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Commercial Property for Sale in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/for-sale/table-view/blouberg/western-cape/11589?sp=r%3dTrue" 
+                                                                                                                >Repossessions in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/for-sale/table-view/blouberg/western-cape/11589?sp=oa%3dTrue" 
+                                                                                                                >Auctions in Table View</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">&nbsp;</p>
+                                                    <p>
+                                                        <a href="/for-sale/table-view/blouberg/western-cape/11589?sp=os%3dTrue" 
+                                                                                                                >On Show in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/for-sale/table-view/blouberg/western-cape/11589?sp=rp%3dTrue" 
+                                                                                                                >Retirement Property for Sale in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/new-developments-for-sale/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Developments for Sale in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/retirement-developments-for-sale/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Retirement Developments for Sale in Table View</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">Helpful Links</p>
+                                                    <p>
+                                                        <a href="/property101/buyers-guide/become-a-first-time-home-owner" 
+                                                                                                                >Buyers Guide</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property-values/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Sold House Prices in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/purchase-property-report" 
+                                                                                                                >Buy Property Reports</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/articles/advice/buying" 
+                                                                                                                >Property Advice for Buyers</a>
+                                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+        <li class="dropdown full-width">
+            <a href="/to-rent" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Rent</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="p24_heading">Looking to Rent?</p>
+                                                    <p>
+                                                        <a href="/houses-to-rent/table-view/blouberg/western-cape/11589" 
+                                                                                                                >House to Rent in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/apartments-to-rent/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Apartment / Flat to Rent in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/commercial-property-to-rent/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Commercial Property to Rent in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/to-rent/table-view/blouberg/western-cape/11589?sp=rp%3dTrue" 
+                                                                                                                >Retirement Property to Rent in Table View</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">&nbsp;</p>
+                                                    <p>
+                                                        <a href="/new-developments-to-rent/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Developments to Rent in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/retirement-developments-to-rent/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Retirement Developments to Rent in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/estate-agencies/western-cape/9" 
+                                                                                                                >Find Letting Agents</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">List Privately</p>
+                                                    <p>
+                                                        <a href="/private-listing/rent-my-property" 
+                                                                                                                >Rent Your Property</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="https://rentalzone.property24.com/?utm_source=homepage_header&amp;utm_medium=link&amp;utm_campaign=consumer_subscription" 
+                                                                                                                >Tenant Screenings</a>
+                                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+        <li class="dropdown full-width">
+            <a href="/selling-your-property" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Sell</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="p24_heading">Looking to Sell?</p>
+                                                    <p>
+                                                        <a href="/estate-agencies/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Find Estate Agents in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/products/products-overview" 
+                                                                                                                >Agency Products</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">List Privately</p>
+                                                    <p>
+                                                        <a href="/private-listing/sell-my-property" 
+                                                                                                                >Sell Your Property</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="p24_heading">Helpful Links</p>
+                                                    <p>
+                                                        <a href="/selling-your-property" 
+                                                                                                                >Get a Free Property Valuation</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property-values/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Sold House Prices in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property101/sellers-guide/the-best-time-to-sell-a-home" 
+                                                                                                                >Seller Guide</a>
+                                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+        <li class="dropdown full-width">
+            <a href="/commercial-property" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Commercial</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-4 p24_commercial_col1 col-xs-push-4">
+                                    <p class="p24_heading">Find Commercial Property</p>
+                                                    <p>
+                                                        <a href="/commercial-property-for-sale/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Commercial Property for Sale in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/commercial-property-to-rent/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Commercial Property to Rent in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/industrial-property-for-sale/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Industrial Property for Sale in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/industrial-property-to-rent/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Industrial Property to Rent in Table View</a>
+                                                    </p>
+                                </div>
+                                <div class="col-3 col-xs-push-4">
+                                    <p class="p24_heading">Helpful Links</p>
+                                                    <p>
+                                                        <a href="/articles/news/commercial" 
+                                                                                                                >Commercial Property News</a>
+                                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+        <li class="dropdown full-width">
+            <a href="/calculators/bond" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Calculators</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-3 p24_calculators_col1 col-xs-push-6">
+                                    <p class="p24_heading">Home Loan Calculators</p>
+                                                    <p>
+                                                        <a href="/calculators/bond" 
+                                                                                                                >Mortgage Bond Calculator</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/calculators/affordability" 
+                                                                                                                >Affordability Calculator</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/calculators/additionalpayment" 
+                                                                                                                >Additional Payment Calculator</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/calculators/bondcosts" 
+                                                                                                                >Bond and Transfer Calculator</a>
+                                                    </p>
+                                </div>
+                                <div class="col-3 p24_calculators_col2 col-xs-push-6">
+                                    <p class="p24_heading">&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+        <li class="dropdown full-width">
+            <a href="/articles/advice" class="dropdown-toggle js_link js_menuLink" data-hover="dropdown">
+                <span class="js_dropdownToggle">Advice</span>
+            </a>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="p24_nav-items-container">
+                            <div class="row">
+                                <div class="col-4 p24_advice_col1 ">
+                                    <p class="p24_heading">Articles</p>
+                                                    <p>
+                                                        <a href="/articles/news" 
+                                                                                                                >Property News</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/articles/advice" 
+                                                                                                                >Property Advice</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property101/sellers-guide/the-best-time-to-sell-a-home" 
+                                                                                                                >Selling Your House</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property101/buyers-guide/become-a-first-time-home-owner" 
+                                                                                                                >Buyers Guide</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4 p24_advice_col2 ">
+                                    <p class="p24_heading">Helpful Links</p>
+                                                    <p>
+                                                        <a href="/property-tools-and-services" 
+                                                                                                                >Property Tools &amp; Services</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/property-values/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Sold House Prices in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/purchase-property-report" 
+                                                                                                                >Buy Property Reports</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/products/products-overview" 
+                                                                                                                >Agency Products</a>
+                                                    </p>
+                                </div>
+                                <div class="col-4 p24_advice_col3 ">
+                                    <p class="p24_heading">&nbsp;</p>
+                                                    <p>
+                                                        <a href="/blouberg/table-view/property-trends/11589" 
+                                                                                                                >Trends &amp; Statistics in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/estate-agencies/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Find Estate Agents in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/attorney-firms/table-view/blouberg/western-cape/11589" 
+                                                                                                                >Find Attorneys in Table View</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="/agent-reviews-marketing" 
+                                                                                                                >Agent Ratings and Reviews</a>
+                                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </li>
+</ul>
+<div class="p24_extra-links js_p24_extra-links">
+<div class="dropdown fill-width">
+    <div class="dropdown-toggle" data-hover="dropdown">
+        <a href="/private-listing/sell-my-property" class="p24_list-privately p24_extra-btn-navbar js_dropdownToggle js_menuLink">
+            List Privately
+        </a>
+    </div>
+    <div class="dropdown-menu" role="menu">
+        <div class="p24_nav-items-container">
+                <p><a href="/private-listing/sell-my-property">Sell Your Property</a></p>
+                <p><a href="/private-listing/rent-my-property">Rent Your Property</a></p>
+        </div>
+    </div>
+</div>
+        <div id="sign-in-portal">
+            <a href="#" id="sign-in-placeholder" class="p24_sign-up-navbar p24_extra-btn-navbar js_dropdownToggle">Sign in</a>
+        </div>
+
+</div>
+
+
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <div id="g_id_onload"
+            class="hide"
+            data-client_id="772958119492-r59gbbjmrqi41jt21kp9q07m3vr4sfg9.apps.googleusercontent.com"
+            data-auto_select="true"
+            data-login_uri="https://www.property24.com/user/GoogleOneTapVerification">
+    </div>
+
+    </div>
+</nav>
+
+   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"DesktopHeader","type":"c"}));
+   </script>
+
+
+<div id="sticky-bar-card" class="hidden-print p24_search p24_fixed navbar p24_bgWhite p24_hide">
+    <div class="p24_nav-container">
+        <header class="navbar-header">
+            <a href="/to-rent" title="Property for sale: Houses for sale: Property24" class="navbar-brand">
+                <img src="/Content/images/Optimized/Logos/property24_logo.svg?z=2cd369fe7776a4beed13" alt="Property24" />
+            </a>
+        </header>
+        <ul class="nav navbar-nav">
+            <li class=" full-width">
+                <div class="p24_listItem">
+                    <span class="p24_address">2 Bedroom Apartment / Flat to Rent in Table View</span>
+                    <span>R 13 000</span>
+                </div>
+            </li>
+        </ul>
+        <div class="p24_extra-links">
+            <div class="p24_favourite js_analyticsV4DesktopStickyCard">
+
+<div class="hidden-print">
+        <a href="#login-modal" class="js_favourite p24_favouriteContainer" data-mandate-id="40202481" data-toggle="modal" title="You must log in to save your favourite listings">
+            <svg width="26" height="23" class="js_fav_empty_star" title="Test tooltip">
+                <image xlink:href="/Content/images/Optimized/Icons/icon_favourite_updated.svg?z=a3c2d05509cd6c15399c" src="/Content/images/Optimized/Icons/icon_favourite_updated.svg?z=a3c2d05509cd6c15399c" width="26" height="23" />
+            </svg>
+        </a>
+</div>
+            </div>
+            <div id="contact-agent-sticky-button"></div>
+        </div>
+    </div>
+</div>
+
+<div class="p24_listing p24_regularListing" data-listingnumber="117661901">
+    <div class="p24_top ">
+        <div class="container">
+            <div class="p24_breadCrumbContainer">
+
+
+<div id="breadCrumbContainer" class="hidden-print p24_breadCrumb">
+    <ul>
+            <li><i class="fa fa-lg fa-angle-left"></i></li>
+            <li>
+                <a id="backToSearchResults" href="javascript:" data-alternate-url="/to-rent/table-view/blouberg/western-cape/11589/p1#117661901" title="Back to Results">
+                    Back to Results
+                </a>
+            </li>
+            <li>|</li>
+                    <li>
+                        <a href="/to-rent" title="Property to Rent: Houses to rent: Property24">Property to Rent</a>
+                    </li>
+                    <li>&gt;</li>
+                    <li>
+                        <a href="/to-rent/western-cape/9" title="Property to rent in Western Cape : Property and houses to rent in Western Cape : Property24.com">Western Cape</a>
+                    </li>
+                    <li>&gt;</li>
+                    <li>
+                        <a href="/to-rent/blouberg/western-cape/658" title="Property and houses to rent in Blouberg : Blouberg Property : Property24.com">Blouberg</a>
+                    </li>
+                    <li>&gt;</li>
+                    <li>
+                        <a href="/to-rent/table-view/blouberg/western-cape/11589" title="Table View Property : Property and houses to rent in Table View : Property24.com">Table View</a>
+                    </li>
+                    <li>&gt;</li>
+                    <li>117661901</li>
+    </ul>
+</div>            </div>
+            <div class="hidden-print">
+
+    <div class="p24_pagerActions">
+
+
+            <a href="/to-rent/beachfront/blouberg/western-cape/25759/117704254" title="2 Bedroom Apartment / flat to rent in Beachfront - Blouberg">
+                Next <i class="fa fa-lg fa-angle-right"></i>
+            </a>
+    </div>
+            </div>
+        </div>
+    </div>
+    <div class="container p24_content ">
+        <section class="p24_details">
+
+<section id="main-gallery" class="p24_gallery">
+
+        <div id="see-all-images-button" class="p24_seeAllImage hidden-print">
+            <span>See all 10 images</span>
+        </div>
+
+    <div id="main-gallery-images-container" class="p24_image js_carouselContainer">
+            <div id="listing-image-gallery-overlay" class="p24_overlay hide">
+                <div class="p24_loader js_gallery-loader">
+                    <span class="p24_spinner">
+                        <span class="p24_dot-1"></span>
+                        <span class="p24_dot-2"></span>
+                        <span class="p24_dot-3"></span>
+                    </span>
+                </div>
+            </div>
+                <a class="p24_fullscreen hidden-print" id="main-gallery-fullscreen" href="javascript:;" title="Enter Fullscreen">
+                    <img src="/Content/images/Optimized/Icons/icon_fullscreen.svg?z=8e742410d37523a0c937" alt="Fullscreen" />
+                </a>
+        <div class="js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="1" data-image-url="https://images.prop24.com/382900703/Ensure1280x720" data-image-loaded="false">
+            <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/382900703" >
+                <img class="hidden-print " src="/blank.gif" alt="Listing number: P24-117661901, Image number: 1" style="background-image: url(https://images.prop24.com/382900703/Ensure1280x720)" />
+                <img class="p24_printGalleryImage js_mainThreeImage " src="https://images.prop24.com/382900703/Ensure1280x720" alt="Listing number: P24-117661901, Image number: 1" />
+            </a>
+        </div>
+            <div class="p24_moreImages">
+        <div class="js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="2" data-image-url="https://images.prop24.com/382900710/Ensure960x540" data-image-loaded="false">
+            <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/382900710" >
+                <img class="hidden-print " src="/blank.gif" alt="Listing number: P24-117661901, Image number: 2" style="background-image: url(https://images.prop24.com/382900710/Ensure960x540)" />
+                <img class="p24_printGalleryImage js_mainThreeImage " src="https://images.prop24.com/382900710/Ensure960x540" alt="Listing number: P24-117661901, Image number: 2" />
+            </a>
+        </div>
+        <div class="js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="3" data-image-url="https://images.prop24.com/382900713/Ensure960x540" data-image-loaded="false">
+            <a href="javascript:;" class="js_lightboxImageSrc" rel="photo[pp_gal]"  data-remote="false" data-lightbox-src="https://images.prop24.com/382900713" >
+                <img class="hidden-print " src="/blank.gif" alt="Listing number: P24-117661901, Image number: 3" style="background-image: url(https://images.prop24.com/382900713/Ensure960x540)" />
+                <img class="p24_printGalleryImage js_mainThreeImage " src="https://images.prop24.com/382900713/Ensure960x540" alt="Listing number: P24-117661901, Image number: 3" />
+            </a>
+        </div>
+            </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="4" data-image-loaded="false">
+                    <div class="js_lightboxImageSrc" rel="photo[pp_gal]" data-lightbox-src="https://images.prop24.com/382900717">
+                    </div>
+                  
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="5" data-image-loaded="false">
+                    <div class="js_lightboxImageSrc" rel="photo[pp_gal]" data-lightbox-src="https://images.prop24.com/382900719">
+                    </div>
+                  
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="6" data-image-loaded="false">
+                    <div class="js_lightboxImageSrc" rel="photo[pp_gal]" data-lightbox-src="https://images.prop24.com/382900721">
+                    </div>
+                  
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="7" data-image-loaded="false">
+                    <div class="js_lightboxImageSrc" rel="photo[pp_gal]" data-lightbox-src="https://images.prop24.com/382900723">
+                    </div>
+                  
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="8" data-image-loaded="false">
+                    <div class="js_lightboxImageSrc" rel="photo[pp_gal]" data-lightbox-src="https://images.prop24.com/382900725">
+                    </div>
+                  
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="9" data-image-loaded="false">
+                    <div class="js_lightboxImageSrc" rel="photo[pp_gal]" data-lightbox-src="https://images.prop24.com/382900726">
+                    </div>
+                  
+                </div>
+                <div class="hide js_lightboxImageWrapper p24_galleryImageHolder js_galleryImage " data-index="10" data-image-loaded="false">
+                    <div class="js_lightboxImageSrc" rel="photo[pp_gal]" data-lightbox-src="https://images.prop24.com/382900727">
+                    </div>
+                  
+                </div>
+    </div>
+</section>
+<section class="hidden-print p24_mediaTabs " id="carousel-media-tabs">
+
+    <div class="p24_mediaTab js_mediaTab p24_activeTab" data-id="#gallery-photos"><img src="/Content/images/Optimized/Icons/icon_photo_updated.svg?z=2c677ffbb452c7f4aa0f" /><span>Photos (10)</span></div>
+
+    <div class="p24_mediaTab js_mediaTab js_showThumbnailGallery" data-id="#gallery-thumbnails">
+        <img src="/Content/images/Optimized/Icons/icon_grid_updated.svg?z=f68c47401fe56380fb6f" alt="Photo Grid" /> <span>Photo Grid</span>
+    </div>
+
+
+
+
+</section>
+
+            <div class="p24_mainContent">
+                <main class="p24_listingContent">
+
+<div class="modal fade p24_modal panel-body p24_small p24_agentContact" id="contact-agent-modal" data-target="#contactModal" data-toggle="modal" data-backdrop="true" data-keyboard="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+           <div class="modal-body">
+                <div class="p24_agentContactContent">
+                    <img src="/Content/images/Optimized/Icons/icon_close_grey.png?z=1cc08bf7b63ad90d18b7" alt="Close" class="p24_close js_closeModalButton" data-dismiss="modal" aria-label="Close" />
+                    <div class="js_contactForAddressForm row">
+                        <div class="col-6">
+                            <h4 class="p24_listingHeadings">Contact Agent</h4>
+
+<div class="hidden-print" id="RequestStreetAddress" itemscope itemtype="http://schema.org/ContactPage">
+    <div class="clearfix"></div>
+
+<form action="/to-rent/table-view/blouberg/western-cape/11589/117661901" class="p24_messageForm js_leadContactForm" method="post"><input id="ListingNumberText_LeadFormBottom" name="ListingNumberText" type="hidden" value="117661901" />        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                <input class="form-control" data-val="true" data-val-atleastoneletter="Please enter a valid name" data-val-maxlength="The field LeadContactName must be a string or array type with a maximum length of &#x27;301&#x27;." data-val-maxlength-max="301" data-val-nodigits="Please enter a valid name" data-val-noillegalnamechars="Please enter a valid name" data-val-nourlemailordomain="Please enter a valid name" data-val-regex="Name is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Name is required" maxlength="301" name="LeadContactName" placeholder="Your Name" type="text" value="" />
+                <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconUser">
+                    <path d="M7.00037 8C9.20974 8 11.0004 6.20937 11.0004 4C11.0004 1.79063 9.20974 0 7.00037 0C4.79099 0 3.00037 1.79063 3.00037 4C3.00037 6.20937 4.79099 8 7.00037 8ZM9.80037 9H9.27849C8.58474 9.31875 7.81287 9.5 7.00037 9.5C6.18787 9.5 5.41912 9.31875 4.72224 9H4.20037C1.88162 9 0.000366211 10.8813 0.000366211 13.2V14.5C0.000366211 15.3281 0.672241 16 1.50037 16H12.5004C13.3285 16 14.0004 15.3281 14.0004 14.5V13.2C14.0004 10.8813 12.1191 9 9.80037 9Z" fill="#3CC89E" />
+                </svg>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactName" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                <input autocomplete="off" class="form-control" data-val="true" data-val-email="Please enter a valid email address." data-val-maxlength="The field LeadContactEmail must be a string or array type with a maximum length of &#x27;70&#x27;." data-val-maxlength-max="70" data-val-regex="Email is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Email is required." maxlength="70" name="LeadContactEmail" placeholder="Your Email" type="text" value="" />
+                <i class="fa fa-envelope"></i>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactEmail" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <div class="p24_mobileNumber p24_inputIconGroup">
+                <input class="form-control" name="ContactMobileNumber" placeholder="Mobile" type="text" value="" />
+                (* Please enter phone number so the agent can contact you.)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                <input class="form-control" data-val="true" data-val-regex="Mobile number is invalid." data-val-regex-pattern="^(?!.{21,})\s*?(\&#x2B;\s*?2\s*?7\s*?\(\s*?0\s*?\)|\&#x2B;\s*?2\s*?7|2\s*?7|0)\s*?(((5(?:0|1|2)\s*?|6(?:0|1|2|3|4|5|6|7|8|9)\s*?|7(?:0|1|2|3|4|5|6|7|8|9)\s*?|8\s*?(?:1|2|3|4))\s*?((?:\d\s*?){7}))|((9600000|9600304|9600305|9600306|9600307|9602001|9602002|9602005|9602006|9602007|9602010|9602011|9603000|9603001|9603002|9603003|9609802|9609803)((?:\d\s*?){2}))|((96003015|96003016|96003017|96003018|96003019)((?:\d\s*?){1})))$" data-val-required="Mobile number is required." name="LeadContactMobileNumber" placeholder="Your Mobile Number" type="text" value="" />
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconNumber">
+                    <path d="M13.3273 13.4914L13.9835 10.6477C14.0546 10.3387 13.8933 10.0216 13.6035 9.89579L10.541 8.58331C10.2731 8.46847 9.95862 8.54503 9.77543 8.77198L8.4192 10.429C6.32198 9.44462 4.57749 7.72474 3.57399 5.58377L5.23099 4.22754C5.45794 4.04161 5.5345 3.7299 5.41966 3.46193L4.10718 0.399495C3.97867 0.106923 3.66149 -0.0544016 3.35251 0.0166907L0.508819 0.672927C0.213511 0.741285 0.000234604 1.00378 0.000234604 1.31276C0.000234604 8.31535 5.67395 14 12.6875 14C12.9937 14 13.2589 13.7895 13.3273 13.4914Z" fill="#3CC89E" />
+                </svg>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactMobileNumber" data-valmsg-replace="true"></span>
+        </div>
+        <div class="p24_messageBodyLead p24_leadMessageBody">
+            <div>
+                <textarea class="form-control js_leadMessageInput" data-val="true" data-val-maxlength="Message length cannot exceed 600 characters." data-val-maxlength-max="600" data-val-minlength="Message must be more than 5 characters." data-val-minlength-min="6" data-val-regex="Message is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Message is required." data-val-stricturlblocking="The field contains a URL or domain, which is not allowed" maxlength="600" name="LeadMessageBody" placeholder="Message Body" rows="4">
+I&#x27;m interested in this property, please contact me.</textarea>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadMessageBody" data-valmsg-replace="true"></span>
+        </div>
+        <div class="clearfix"></div>
+        <button type="submit" class="btn btn-lg btn-block btn-success js_leadMessageSendButton">
+            <span class="js_textModal">Send Message</span>
+            <div class="hide p24_loader js_spinnerModal">
+                <span class="p24_spinner p24_counterSpinner">
+                    <span class="p24_dot-1"></span>
+                    <span class="p24_dot-2"></span>
+                    <span class="p24_dot-3"></span>
+                </span>
+                <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+            </div>
+        </button>
+<input name="__RequestVerificationToken" type="hidden" value="REDACTED_TOKEN" /></form>    <div class="p24_popiBeforeContinuing js_popiBeforeContinuing">
+    By continuing I understand and agree with Property24&rsquo;s
+    <a href="/terms-and-conditions" target="_blank" title="Terms and Conditions">Terms&nbsp;&amp;&nbsp;Conditions</a>
+    and
+    <a href="/privacy-policy" target="_blank" title="Privacy Policy">Privacy&nbsp;Policy</a>.
+</div>
+</div>
+                        </div>
+
+                        <div class="col-6">
+<div class="p24_agent">
+
+<div class="js_agentDetails p24_agentDetails" data-value="u3wlesy2w52ysmk6dpqd6hnbiuzkstrbwurrxen7qi6kfi25xbloprzm6pjg4y2jzczattfcbxjihsl3v47a3dx7by4bqegwzhnfa2y" data-private-listing="false">
+    <div>
+        <div class="p24_agentPhoto">
+            <a href="/estate-agents/re-max-property-associates-western-cape/julius-illyes/3866" title="Agent profile for Julius Illyes">
+                <img src="https://images.prop24.com/120986503/UpperCrop200x200" alt="Agent profile for Julius Illyes" class="img-responsive js_agentPhoto" />
+            </a>
+        </div>
+        <div class="p24_agentInfo">
+            <h5 class="p24_agentName">
+                    <a href="/estate-agents/re-max-property-associates-western-cape/julius-illyes/3866">Julius Illyes</a>
+            </h5>
+        </div>
+    </div>
+    <div class="p24_contactButtons">
+
+<div data-react-component="Views_Listing_AgentContactNumberToggle" id="fb0482b6725046419f274fb1e8c06c08">
+    <div class="p24_showNumbers js_hideShowContactToggle js_agentShowNumber">
+        <a href='javascript:;' title="Show Contact Number" class="js_contactNumbersLink js_hideAgentName btn btn-block">
+            <img src="/Content/images/Optimized/Icons/icon_call_updated.svg?z=36c5310a4224120405fd" alt="phone" class="js_icon" />
+            <span class="js_text p24_placeholder">Show Contact Number</span>
+        </a>
+    </div>
+</div>
+<script type="application/json" data-props-for="fb0482b6725046419f274fb1e8c06c08">
+    {"isSpui":false,"showAgentName":false,"agentId":3866,"countryId":1,"listingNumber":{"number":117661901,"isValid":true},"value":"u3wlesy2w52ysmk6dpqd6hnbivhfvksfx3tb7sks4yrk4ik7bzr65n5tlvfmvkvbwpwu5tumc4zexs4fevfssh6r3tzny6aafdnhsyy"}
+</script>
+            <div class="clearfix"></div>
+
+<div data-react-component="Views_Listing_WhatsappAgentButton" id="0ad3a7838fb8477999bd86ae894f883d">
+    <div class="p24_showNumbers">
+        <a href='javascript:;' title="WhatsApp Agent" class="btn btn-block p24_contactWhatsAppCTA">
+            <img src="/Content/images/Optimized/Icons/icon_whatsapp_white.svg?z=a88f0a171d25f71cab5b" alt="WhatsApp" class="p24_iconNumber" />
+            <span class="p24_placeholder">WhatsApp Agent</span>
+        </a>
+    </div>
+</div>
+<script type="application/json" data-props-for="0ad3a7838fb8477999bd86ae894f883d">
+    {"agentId":3866,"defaultContactMessage":"I\u0027m interested in this property, please contact me."}
+</script>    </div>
+
+</div>
+</div>
+                        </div>
+                    </div>
+
+<div class="hide p24_RequestAddress js_messageSentResult">
+    <div class="hidden-print text-center p24_messageResultContainer">
+        <div class="p24_contents">
+            <div class="p24_icon">
+                <img src="/Content/images/Optimized/Icons/icon_check.svg?z=fa586256542292a1590e" class="js_messageSuccessIcon hide" alt="Success">
+                <img src="/Content/images/Optimized/Icons/icon_exclamationcircle.svg?z=e8c9774b6427f6c3a579" class="js_messageLoginRequiredIcon hide" alt="Warning">
+                <img src="/Content/images/Optimized/Icons/icon_timescircle.svg?z=d17d2386a19c1d918cb5" class="js_messageFailedIcon hide" alt="Error">
+            </div>
+            <h2 class="p24_state js_messageSentHeading"></h2>
+            <div class="p24_confirmationMessage js_messageSentDetail"></div>
+        </div>
+
+        <button type="button" class="btn btn-lg btn-block btn-success hide js_closeModalButton btn-result" alt="Close" data-dismiss="modal" aria-label="Close">Close</button>
+
+        <div class="p24_npsSection js_npsSection hide" data-mandate-id="40202481">
+            <h3 class="p24_npsHeading">Tell us what you think</h3>
+            <p class="p24_npsQuestion">On a scale of 1 to 10, how likely are you to recommend Property24 to a friend or colleague?</p>
+            <div class="p24_npsScoreButtons">
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="1">1</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="2">2</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="3">3</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="4">4</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="5">5</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="6">6</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="7">7</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="8">8</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="9">9</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="10">10</button>
+            </div>
+            <div class="p24_npsScoreLabels">
+                <small>Not likely at all</small>
+                <small>Extremely likely</small>
+            </div>
+            <p class="p24_npsFeedbackLabel">How could we make finding your perfect home easier?</p>
+            <textarea class="p24_npsFeedbackTextarea js_npsFeedbackTextarea" rows="6" maxlength="1000"></textarea>
+            <div class="p24_npsCharCount">
+                <small class="js_npsCharCount">0 / 1000 Characters</small>
+            </div>
+            <div class="p24_npsSendButtonWrapper">
+                <button type="button" class="p24_npsSendButton js_npsSendButton" disabled="disabled">Send feedback</button>
+            </div>
+        </div>
+        <div class="p24_npsThankYou js_npsThankYou hide">
+            <p>Thank you for your feedback!</p>
+        </div>
+
+        <div class="js_loginRequired hide">
+            <button class="btn btn-lg btn-block btn-primary js_signInButton" alt="Sign In" data-dismiss="modal" aria-label="Sign In">Sign In</button>
+            <div class="p24_forgotPassword">
+                <a href="" class="js_resetPasswordUrl">Forgot Password?</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+                </div>
+                <div id="contact-agent-html-success" class="hide">Thank you for your enquiry. A message has been sent to <span class='p24_bold'>RE/MAX Property Associates - Western Cape</span> and an agent will be in contact with you shortly.</div>
+           </div>
+       </div>
+
+    </div>
+</div>
+
+   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"ContactForAddressForm","props":{"type":0,"modalId":"contact-agent-modal","successHtmlFieldId":"contact-agent-html-success","successHeaderText":"Message Sent Successfully","contactAgentIsAdminUser":false,"isAdminLeadFieldId":"IsAdminLead","requestStreetAddressMessage":"Please send me the street address for this property.","resetPasswordUrl":"/reset-password","listingSendAgentAMessageActionUrl":"/Listing/SendAgentAMessage"},"type":"c"}));
+   </script>
+<article class="p24_listingCard p24_listingFeaturesWrapper">
+    <header class="m-flex m-items-center">
+        <div class="p24_price m-flex">R 13 000
+            
+
+
+
+        </div>
+
+
+        <div class="p24_actions m-flex hidden-print">
+
+<div class="p24_shareDropdown">
+    <div class="p24_share_button">
+        <img src="/Content/images/Optimized/Icons/icon_share_updated.svg?z=ad5774537684f63b3253" class="js_shareIcon" alt="share" />
+    </div>
+
+    <div class="p24_social js_shareOptionsContainer hide">
+            <a href="https://www.property24.com/to-rent/table-view/blouberg/western-cape/11589/117661901?utm_source=facebook&amp;utm_medium=referral&amp;utm_campaign=socialmedia" title="Share on Facebook" class="share-social-button-facebook js_facebookShare">
+                <img src="/Content/images/Optimized/Icons/icon_facebook_social.svg?z=a4ca447a6b4b31b557b1" alt="Facebook" />
+            </a>
+            <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fwww.property24.com%2fto-rent%2ftable-view%2fblouberg%2fwestern-cape%2f11589%2f117661901%3futm_source%3dx%26utm_medium%3dreferral%26utm_campaign%3dsocialmedia&text=2 Bedroom Apartment / flat to rent in Table View, Blouberg R 13 000 : Property24" title="Share on Twitter" class="share-social-button-twitter">
+                <img src="/Content/images/Optimized/Icons/icon_twitter_social_dark.svg?z=1b75a5a3d602c7a11854" alt="Twitter" />
+            </a>
+
+            <a href="https://api.whatsapp.com/send?text=Check out this property I found on Property24! https%3a%2f%2fwww.property24.com%2fto-rent%2ftable-view%2fblouberg%2fwestern-cape%2f11589%2f117661901%3futm_source%3dwhatsapp%26utm_medium%3dreferral%26utm_campaign%3dsocialmedia" target="_blank" data-action="share/whatsapp/share" title="Share on WhatsApp" class="share-social-button-whatsapp">
+                <img src="/Content/images/Optimized/Icons/icon_whatsapp_social.svg?z=baa384371fb9f6e1c994" alt="WhatsApp" />
+            </a>
+            <a href="#EmailModal" title="Email" data-toggle="modal" data-target="#EmailModal" class="share-email">
+                <img src="/Content/images/Optimized/Icons/icon_message_social.svg?z=5dd1e928fbe3963c1295" alt="Email" />
+            </a>
+    </div>
+
+
+<div class="modal fade p24_modal p24_small p24_emailDialogue" id="EmailModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img src="/Content/images/Optimized/Icons/icon_close_grey.png?z=1cc08bf7b63ad90d18b7" alt="Close" class="p24_close" data-dismiss="modal" aria-label="Close" />
+                        <div class="clearfix"></div>
+                        <h5>
+                            <span class="title">Send Listing to:</span>
+                        </h5>
+<form action="/GeneralSession/SendEmail" class="p24_emailForm" id="EmailForm" method="post" novalidate="">                            <div class="form-group js_58714390">
+                                <label class="control-label" for="ToEmail">To email*</label>
+                                 
+<input class="form-control p24_input" data-mailcheck="a833deec-9cc3-4d92-9ffb-0d6b691a3fe2" data-mailcheck-parent="js_58714390" data-val="true" data-val-email="This is not a valid email address" data-val-required="This field is required" id="ToEmail" name="ToEmail" placeholder="To Email" type="text" value="" />
+
+                            </div>
+                            <div class="form-group js_58714390">
+                                <label class="control-label" for="FromEmail">From email*</label>
+                                 
+<input class="form-control p24_input" data-mailcheck="9c42810d-41e0-4519-b4d7-f1a461a9fc10" data-mailcheck-parent="js_58714390" data-val="true" data-val-email="This is not a valid email address" data-val-required="This field is required" id="FromEmail" name="FromEmail" placeholder="From Email" type="text" value="" />
+
+                            </div>
+<span class="text-danger field-validation-valid" data-valmsg-for="FromEmail" data-valmsg-replace="true"></span>                            <div class="form-group">
+                                <label class="control-label" for="Message">Optional Message</label>
+                                <textarea class="form-control" id="Message" name="Message" placeholder="Optional Message" rows="5">
+</textarea>
+                            </div>
+<input id="PostData" name="PostData" type="hidden" value="P24-117661901," /><input data-val="true" data-val-required="The PostDataType field is required." id="PostDataType" name="PostDataType" type="hidden" value="Listing" /><input id="DevelopmentContext" name="DevelopmentContext" type="hidden" value="Rental" />                            <div class="form-group">
+                                <span id="EmailResultText" class="hide">
+                                </span>
+                                <button type="button" class="pull-right btn btn-success" id="SendEmail">
+                                    <span>Send</span>
+                                    <i class="fa fa-spinner fa-spin hide"></i>
+                                </button>
+                                <button type="button" class="pull-right btn btn-default" id="CancelEmail" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            </div>
+<input name="__RequestVerificationToken" type="hidden" value="REDACTED_TOKEN" /></form>                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div></div>            <div class="p24_favourite">
+
+<div class="hidden-print">
+        <a href="#login-modal" class="js_favourite p24_favouriteContainer" data-mandate-id="40202481" data-toggle="modal" title="You must log in to save your favourite listings">
+            <svg width="26" height="23" class="js_fav_empty_star" title="Test tooltip">
+                <image xlink:href="/Content/images/Optimized/Icons/icon_favourite_updated.svg?z=a3c2d05509cd6c15399c" src="/Content/images/Optimized/Icons/icon_favourite_updated.svg?z=a3c2d05509cd6c15399c" width="26" height="23" />
+            </svg>
+        </a>
+</div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="p24_content">
+        <h1>2 Bedroom Apartment / Flat to Rent in Table View</h1>
+
+            <address class="p24_textAddress">Table View, Blouberg</address>
+
+<div data-react-component="Views_Listing_AgentContactForAddressLink" id="b2c0af947127456dae5ef7a39b5b8f7e">
+    <div><a class="p24_address">Contact agent for street address</a></div>
+</div>
+<script type="application/json" data-props-for="b2c0af947127456dae5ef7a39b5b8f7e">
+    {"defaultContactMessage":"Please send me the street address for this property."}
+</script>    
+        <div class="m-flex  m-items-center">
+        <section class="p24_iconsWrapper" aria-label="Property Features">
+            <ul class="p24_icons">
+                        <li class="p24_featureDetails" title="Bedrooms">
+                            <img src="/Content/images/Optimized/Icons/icon_room_updated.svg?z=6c84d847c821dd21f95b" alt="Bedrooms" aria-hidden="true" class="p24_bedroomIcon" />
+                            <span>2</span>
+                            </li>
+                        <li class="p24_featureDetails" title="Bathrooms">
+                            <img src="/Content/images/Optimized/Icons/icon_bathroom_updated.svg?z=33a62f9c8fbd7bedb12f" alt="Bathrooms" aria-hidden="true" class="p24_bathroomIcon" />
+                            <span>1</span>
+                            </li>
+                        <li class="p24_featureDetails" title="Parking Spaces">
+                            <img src="/Content/images/Optimized/Icons/icon_parking_updated.svg?z=cbfbee0fd335a72b1245" alt="" aria-hidden="true" class="p24_garageIcon" />
+                            <span>2</span>
+                            </li>
+
+                    <li class="p24_featureDetails p24_size">
+                            <img src="/Content/images/Optimized/Icons/icon_floor_new.svg?z=6469c3498bc6c7f3625f" title="Floor Size" alt="Floor Size" aria-hidden="true" class="p24_sizeIcon" />
+                            <span>56 m&#xB2;</span>
+                    </li>
+
+            </ul>    
+        </section> 
+            <div class="p24_badgesContainer">
+
+    <ul class="p24_badges">
+                <li class="p24_availableBadge">AVAILABLE NOW</li>
+    </ul>
+            </div>
+    </div>
+    </div>
+</article>
+
+   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"BondCalculatorsDesktop","props":{"logUrl":"https://www.property24.com/calculators/logmortgagecalc","propertyTypeId":5,"containerSelector":".js_bondModal","isInModal":true,"mortgageUrl":"/calculators/bond","affordabilityUrl":"/calculators/affordability","additionalUrl":"/calculators/additionalpayment","costsUrl":"/calculators/bondcosts","isOnListingPage":true},"type":"c"}));
+   </script>
+
+   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"ListingSummaryCard","type":"c"}));
+   </script>
+
+
+
+<div class="modal fade p24_modal panel-body p24_small p24_agentContact p24_agentContactmodal p24_regularListingSuccess" id="whatsapp-agent-modal" data-backdrop="true" data-keyboard="true">
+    <div class="p24_agentContactContent">
+        <img src="/Content/images/Optimized/Icons/icon_close_grey.png?z=1cc08bf7b63ad90d18b7" alt="Close" class="p24_close" data-dismiss="modal" aria-label="Close" />
+        <div class="js_contactForAddressForm p24_whatsappMessageInfo">
+            <div class="p24_contactForm">
+                <h4 class="p24_listingHeadings">WhatsApp Agent</h4>
+                <form class="p24_messageForm js_leadContactForm" data-form-type="1">
+                    <input data-val="true" data-val-maxlength="Message length cannot exceed 600 characters." data-val-maxlength-max="600" data-val-minlength="Message must be more than 5 characters." data-val-minlength-min="6" data-val-regex="Message is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Message is required." data-val-stricturlblocking="The field contains a URL or domain, which is not allowed" id="LeadMessageBody" name="LeadMessageBody" type="hidden" value="I&#x27;m interested in this property, please contact me." />
+                    <input id="ListingNumberText_WhatsAppForm" name="ListingNumberText" type="hidden" value="117661901" />
+
+                    <div class="form-group">
+                        <div class="p24_inputIconGroup">
+                            <input class="form-control p24_textInput" data-val="true" data-val-atleastoneletter="Please enter a valid name" data-val-maxlength="The field LeadContactName must be a string or array type with a maximum length of &#x27;301&#x27;." data-val-maxlength-max="301" data-val-nodigits="Please enter a valid name" data-val-noillegalnamechars="Please enter a valid name" data-val-nourlemailordomain="Please enter a valid name" data-val-regex="Name is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Name is required" maxlength="301" name="LeadContactName" placeholder="Your Name" type="text" value="" />
+                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconUser">
+                                <path d="M7.00037 8C9.20974 8 11.0004 6.20937 11.0004 4C11.0004 1.79063 9.20974 0 7.00037 0C4.79099 0 3.00037 1.79063 3.00037 4C3.00037 6.20937 4.79099 8 7.00037 8ZM9.80037 9H9.27849C8.58474 9.31875 7.81287 9.5 7.00037 9.5C6.18787 9.5 5.41912 9.31875 4.72224 9H4.20037C1.88162 9 0.000366211 10.8813 0.000366211 13.2V14.5C0.000366211 15.3281 0.672241 16 1.50037 16H12.5004C13.3285 16 14.0004 15.3281 14.0004 14.5V13.2C14.0004 10.8813 12.1191 9 9.80037 9Z" fill="#3CC89E" />
+                            </svg>
+                        </div>
+                        <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactName" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="p24_inputIconGroup">
+                             
+<input autocomplete="off" class="form-control" data-mailcheck="b00f2c65-c470-434f-b77e-cef2e6aaf427" data-val="true" data-val-email="Please enter a valid email address." data-val-maxlength="The field LeadContactEmail must be a string or array type with a maximum length of &#x27;70&#x27;." data-val-maxlength-max="70" data-val-regex="Email is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Email is required." maxlength="70" name="LeadContactEmail" placeholder="Your Email" type="text" value="" />
+
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactEmail" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="p24_mobileNumber p24_inputIconGroup">
+                            <input class="form-control" name="ContactMobileNumber" placeholder="Mobile" type="text" value="" />
+                            (* Please enter phone number so the agent can contact you.)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="p24_inputIconGroup">
+                            <input class="form-control" data-val="true" data-val-regex="Mobile number is invalid." data-val-regex-pattern="^(?!.{21,})\s*?(\&#x2B;\s*?2\s*?7\s*?\(\s*?0\s*?\)|\&#x2B;\s*?2\s*?7|2\s*?7|0)\s*?(((5(?:0|1|2)\s*?|6(?:0|1|2|3|4|5|6|7|8|9)\s*?|7(?:0|1|2|3|4|5|6|7|8|9)\s*?|8\s*?(?:1|2|3|4))\s*?((?:\d\s*?){7}))|((9600000|9600304|9600305|9600306|9600307|9602001|9602002|9602005|9602006|9602007|9602010|9602011|9603000|9603001|9603002|9603003|9609802|9609803)((?:\d\s*?){2}))|((96003015|96003016|96003017|96003018|96003019)((?:\d\s*?){1})))$" data-val-required="Mobile number is required." name="LeadContactMobileNumber" placeholder="Your Mobile Number" type="text" value="" />
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconNumber">
+                                <path d="M13.3273 13.4914L13.9835 10.6477C14.0546 10.3387 13.8933 10.0216 13.6035 9.89579L10.541 8.58331C10.2731 8.46847 9.95862 8.54503 9.77543 8.77198L8.4192 10.429C6.32198 9.44462 4.57749 7.72474 3.57399 5.58377L5.23099 4.22754C5.45794 4.04161 5.5345 3.7299 5.41966 3.46193L4.10718 0.399495C3.97867 0.106923 3.66149 -0.0544016 3.35251 0.0166907L0.508819 0.672927C0.213511 0.741285 0.000234604 1.00378 0.000234604 1.31276C0.000234604 8.31535 5.67395 14 12.6875 14C12.9937 14 13.2589 13.7895 13.3273 13.4914Z" fill="#3CC89E" />
+                            </svg>
+                        </div>
+                        <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactMobileNumber" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <button type="submit" class="btn btn-lg btn-block btn-success">
+                        <span class="js_text">
+                            <img src="/Content/images/Optimized/Icons/icon_whatsapp_white_outline.svg?z=3ac9b596e6ad8a14ff8f" alt="Contact Number" class="p24_iconNumber p24_mRS" width="18" />
+                            Whatsapp
+                        </span>
+
+<div class="hide p24_loader js_spinner">
+    <span class="p24_spinner p24_counterSpinner">
+        <span class="p24_dot-1"></span>
+        <span class="p24_dot-2"></span>
+        <span class="p24_dot-3"></span>
+    </span>
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+</div>                    </button>
+                </form>
+                <div class="p24_popiBeforeContinuing js_popiBeforeContinuing">
+    By continuing I understand and agree with Property24&rsquo;s
+    <a href="/terms-and-conditions" target="_blank" title="Terms and Conditions">Terms&nbsp;&amp;&nbsp;Conditions</a>
+    and
+    <a href="/privacy-policy" target="_blank" title="Privacy Policy">Privacy&nbsp;Policy</a>.
+</div>
+            </div>
+                <div class="p24_agentDetails">
+                    <div class="p24_agentPhoto">
+                        <img id="whatsapp-agent-image" src="" alt="WhatsApp Agent" class="img-responsive" />
+                    </div>
+                    <div class="p24_agentInfo">
+                        <h5>
+                            <span class="js_whatsAppAgentName"></span>
+                        </h5>
+                    </div>
+                </div>
+
+        </div>
+
+<div class="hide p24_RequestAddress js_messageSentResult">
+    <div class="hidden-print text-center p24_messageResultContainer">
+        <div class="p24_contents">
+            <div class="p24_icon">
+                <img src="/Content/images/Optimized/Icons/icon_check.svg?z=fa586256542292a1590e" class="js_messageSuccessIcon hide" alt="Success">
+                <img src="/Content/images/Optimized/Icons/icon_exclamationcircle.svg?z=e8c9774b6427f6c3a579" class="js_messageLoginRequiredIcon hide" alt="Warning">
+                <img src="/Content/images/Optimized/Icons/icon_timescircle.svg?z=d17d2386a19c1d918cb5" class="js_messageFailedIcon hide" alt="Error">
+            </div>
+            <h2 class="p24_state js_messageSentHeading"></h2>
+            <div class="p24_confirmationMessage js_messageSentDetail"></div>
+        </div>
+
+        <button type="button" class="btn btn-lg btn-block btn-success hide js_closeModalButton btn-result" alt="Close" data-dismiss="modal" aria-label="Close">Close</button>
+
+        <div class="p24_npsSection js_npsSection hide" data-mandate-id="40202481">
+            <h3 class="p24_npsHeading">Tell us what you think</h3>
+            <p class="p24_npsQuestion">On a scale of 1 to 10, how likely are you to recommend Property24 to a friend or colleague?</p>
+            <div class="p24_npsScoreButtons">
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="1">1</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="2">2</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="3">3</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="4">4</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="5">5</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="6">6</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="7">7</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="8">8</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="9">9</button>
+                    <button type="button" class="p24_npsScoreButton js_npsScoreButton" data-score="10">10</button>
+            </div>
+            <div class="p24_npsScoreLabels">
+                <small>Not likely at all</small>
+                <small>Extremely likely</small>
+            </div>
+            <p class="p24_npsFeedbackLabel">How could we make finding your perfect home easier?</p>
+            <textarea class="p24_npsFeedbackTextarea js_npsFeedbackTextarea" rows="6" maxlength="1000"></textarea>
+            <div class="p24_npsCharCount">
+                <small class="js_npsCharCount">0 / 1000 Characters</small>
+            </div>
+            <div class="p24_npsSendButtonWrapper">
+                <button type="button" class="p24_npsSendButton js_npsSendButton" disabled="disabled">Send feedback</button>
+            </div>
+        </div>
+        <div class="p24_npsThankYou js_npsThankYou hide">
+            <p>Thank you for your feedback!</p>
+        </div>
+
+        <div class="js_loginRequired hide">
+            <button class="btn btn-lg btn-block btn-primary js_signInButton" alt="Sign In" data-dismiss="modal" aria-label="Sign In">Sign In</button>
+            <div class="p24_forgotPassword">
+                <a href="" class="js_resetPasswordUrl">Forgot Password?</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+    </div>
+    <div id="whatsapp-agent-html-success" class="hide">Thank you for your enquiry. A WhatsApp chat has been opened with <span class="p24_bold js_whatsAppAgentName"></span>.</div>
+</div>
+
+   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"ContactForAddressForm","props":{"type":1,"modalId":"whatsapp-agent-modal","successHtmlFieldId":"whatsapp-agent-html-success","successHeaderText":"Success","contactAgentIsAdminUser":false,"isAdminLeadFieldId":"IsAdminLead","resetPasswordUrl":"/reset-password","listingSendAgentAMessageActionUrl":"/Listing/SendAgentAMessage"},"type":"c"}));
+   </script>
+
+                    <section class="p24_listingCard p24_listingAbout js_readMoreContainer ">
+                            <h5>Ideally located </h5>
+                        <div class="p24_descriptionContainer">
+
+<div id="742288769" class="js_readMore" data-new="True" data-more-text="Read full description" data-less-text="Close full description">
+    <div class="js_readMoreText p24_readMoreText">
+        <div class="js_visibleText p24_abbreviatedText">            <p>Located on North road, walking distance to stores and the bus stop.</p>
+            <p>Exceptionally neat 2 bedroom 1st floor apartment, only 8 units in the complex.</p>
+            <p>2 spacious bedrooms with built-in cupboards, one renovated neat bathroom.</p>
+            <p>Kitchen with granite tops, built in oven hob and extractor fan, plumbed for 1 wet appliance.</p>
+            <p>There is a balcony off the living area.</p>
+            <p>2x Parking bays</p>
+            <p>Pre-paid water and electricity.</p>
+</div>
+        <div class="js_expandedText p24_expandedText hide">            <p>Located on North road, walking distance to stores and the bus stop.</p>
+            <p>Exceptionally neat 2 bedroom 1st floor apartment, only 8 units in the complex.</p>
+            <p>2 spacious bedrooms with built-in cupboards, one renovated neat bathroom.</p>
+            <p>Kitchen with granite tops, built in oven hob and extractor fan, plumbed for 1 wet appliance.</p>
+            <p>There is a balcony off the living area.</p>
+            <p>2x Parking bays</p>
+            <p>Pre-paid water and electricity.</p>
+</div>
+    </div>
+</div>
+
+
+                        </div>
+                    </section>
+
+                        <section class="p24_listingCard m-flex m-gap-l m-direction-column">
+                            <h4>Features</h4>
+<div class="p24_keyFeaturesWrapper">
+    <div class="p24_keyFeaturesContainer">
+        <div class="p24_listingFeatures">
+            <span class="p24_keyFeaturesIconWrapper">
+                <img src="/Content/images/Optimized/Icons/icon_bedroom_updated.svg?35-31-2E-38-2E-39-36-36-2E-30" alt="Bedrooms" class="p24_keyFeaturesIcon p24_Bedrooms" />
+            </span>
+
+                <span class="p24_feature">Bedrooms:</span>
+                <span class="p24_featureAmount">2</span>
+        </div>
+        <div class="p24_listingFeatures">
+            <span class="p24_keyFeaturesIconWrapper">
+                <img src="/Content/images/Optimized/Icons/icon_bath_updated.svg?35-31-2E-38-2E-39-36-36-2E-30" alt="Bathrooms" class="p24_keyFeaturesIcon p24_Bathrooms" />
+            </span>
+
+                <span class="p24_feature">Bathrooms:</span>
+                <span class="p24_featureAmount">1</span>
+        </div>
+        <div class="p24_listingFeatures">
+            <span class="p24_keyFeaturesIconWrapper">
+                <img src="/Content/images/Optimized/Icons/icon_parking_round_updated.svg?35-31-2E-38-2E-39-36-36-2E-30" alt="Parking" class="p24_keyFeaturesIcon p24_Parking" />
+            </span>
+
+                <span class="p24_feature">Parking:</span>
+                <span class="p24_featureAmount">2</span>
+        </div>
+    </div>
+    <div class="p24_keyFeaturesContainer p24_pL20">
+    </div>
+</div>
+                        </section>
+
+
+<div data-react-component="Client_Listing_ListingAskAboutCard" id="cbe0a9ffb9c7431f84c9b12da10f290a">
+    <section class="p24_listingCard m-flex m-gap-l m-direction-column p24_askAboutProperty">
+        <h4>Ask About this Property</h4>
+        <div>
+            <span>...</span>
+            <span>Are water and electricity included?</span>
+            <span>Is WiFi included?</span>
+        </div>
+    </section>
+</div>
+<script type="application/json" data-props-for="cbe0a9ffb9c7431f84c9b12da10f290a">
+    {"agentSingular":"Agent","questions":["When can I schedule a viewing?","What is the pet policy?","Is the property furnished?","Are water and electricity included?","Is WiFi included?"]}
+</script>
+
+<div class="p24_listingCard p24_galleryThumbnails p24_thumbnail3Row p24_withViewMore" id="listing-thumbnails">
+    <div class="p24_galleryWrapper">
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/382900703/Crop320x213" alt="Listing number: P24-117661901, Image number: 1" data-index="1" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/382900710/Crop320x213" alt="Listing number: P24-117661901, Image number: 2" data-index="2" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/382900713/Crop320x213" alt="Listing number: P24-117661901, Image number: 3" data-index="3" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/382900717/Crop320x213" alt="Listing number: P24-117661901, Image number: 4" data-index="4" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/382900719/Crop320x213" alt="Listing number: P24-117661901, Image number: 5" data-index="5" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/382900721/Crop320x213" alt="Listing number: P24-117661901, Image number: 6" data-index="6" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/382900723/Crop320x213" alt="Listing number: P24-117661901, Image number: 7" data-index="7" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/382900725/Crop320x213" alt="Listing number: P24-117661901, Image number: 8" data-index="8" />
+            </div>
+            <div class="p24_galleryThumbnail">
+                <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/grey_320x213.png?z=dad4383b82e1196655f1" lazy-src="https://images.prop24.com/382900726/Crop320x213" alt="Listing number: P24-117661901, Image number: 9" data-index="9" />
+            </div>
+                <button class="btn btn-default p24_showThumbnailGallery" id="view-more-thumbnails">+2</button>
+    </div>
+
+</div>
+
+
+<div class="p24_listingCard p24_propertyOverview">
+    <div id="accordion" class="p24_accordion p24_mainAccordion" role="tablist" aria-multiselectable="true">
+            <div class="panel">
+                <div class="panel-heading " role="button" data-toggle="collapse" data-target="#js_accordion_propertyoverview" aria-expanded="true">
+                    <span>Property Overview</span>
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_minus.svg?z=df2ee9017f49005f9da5' class='p24_minusIcon ' />
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe' class='p24_plusIcon' />
+                </div>
+                <div id="js_accordion_propertyoverview" class="panel-collapse collapse in" role="tabpanel">
+                    <div class="panel-body">
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Listing Number</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">117661901</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Type of Property</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">Apartment / Flat</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Description</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">Second floor and above</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Occupation Date</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">01 November 2026</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Deposit Requirements</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">1 Month deposit</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Floor Size</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">56 m&#xB2;</div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading collapsed" role="button" data-toggle="collapse" data-target="#js_accordion_rooms" aria-expanded="true">
+                    <span>Rooms</span>
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_minus.svg?z=df2ee9017f49005f9da5' class='p24_minusIcon ' />
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe' class='p24_plusIcon' />
+                </div>
+                <div id="js_accordion_rooms" class="panel-collapse collapse " role="tabpanel">
+                    <div class="panel-body">
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Bedrooms</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">2</div>
+                                            <div class="p24_info">Spacious</div>
+                                            <div class="p24_info"></div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Bathrooms</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">1</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Kitchen</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">Stove (Oven &amp; Hob), Extractor Fan</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Lounges</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">1</div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading collapsed" role="button" data-toggle="collapse" data-target="#js_accordion_externalfeatures" aria-expanded="true">
+                    <span>External Features</span>
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_minus.svg?z=df2ee9017f49005f9da5' class='p24_minusIcon ' />
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe' class='p24_plusIcon' />
+                </div>
+                <div id="js_accordion_externalfeatures" class="panel-collapse collapse " role="tabpanel">
+                    <div class="panel-body">
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Parking</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">2</div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading collapsed" role="button" data-toggle="collapse" data-target="#js_accordion_building" aria-expanded="true">
+                    <span>Building</span>
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_minus.svg?z=df2ee9017f49005f9da5' class='p24_minusIcon ' />
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe' class='p24_plusIcon' />
+                </div>
+                <div id="js_accordion_building" class="panel-collapse collapse " role="tabpanel">
+                    <div class="panel-body">
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Style</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">Modern</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Facing</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">North, West</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Roof</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">Tile</div>
+                                </div>
+                            </div>
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Wall</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">Plaster</div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading collapsed" role="button" data-toggle="collapse" data-target="#js_accordion_otherfeatures" aria-expanded="true">
+                    <span>Other Features</span>
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_minus.svg?z=df2ee9017f49005f9da5' class='p24_minusIcon ' />
+                        <img src='/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe' class='p24_plusIcon' />
+                </div>
+                <div id="js_accordion_otherfeatures" class="panel-collapse collapse " role="tabpanel">
+                    <div class="panel-body">
+                            <div class="row p24_propertyOverviewRow">
+                                <div class="col-6 p24_propertyOverviewKey">Security</div>
+                                <div class="col-6 p24_propertyOverviewResult">
+                                            <div class="p24_info">Gated Village</div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading collapsed" role="button" data-toggle="collapse" data-target="#accordian-points-of-interest">
+                    Points of Interest
+                    <img src='/Content/images/Optimized/Icons/icon_read_more_plus.svg?z=705f2227faa79f6b5afe' class='p24_plusIcon' /> <img src='/Content/images/Optimized/Icons/icon_read_more_minus.svg?z=df2ee9017f49005f9da5' class='p24_minusIcon hide' />
+                </div>
+                <div id="accordian-points-of-interest" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                        <div id="P24_poi" class="hidden-print p24_poi">
+                            <div id="P24_pointsOfInterest" data-load-on-appear-url="/ListingReadOnly/PointsOfInterestForListing?ListingNumber=117661901">
+<div class="hidden-print p24_loader">
+    <i class="fa fa-2x fa-spin fa-spinner"></i> 
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" /> Loading
+</div>                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+                        <section class="hidden-print p24_listingCard">
+                            <div data-load-on-appear-url="/ListingReadOnly/TenantPlusCard?listingNumber=117661901&amp;isSpui=False">
+                                <div class="hidden-print p24_loader">
+    <i class="fa fa-2x fa-spin fa-spinner"></i> 
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" /> Loading
+</div>
+                            </div>
+                        </section>
+
+                    <section class="hidden-print p24_listingCard p24_recentSales">
+                        <div id="P24_recentSales" data-load-on-appear-url="/Listing/RecentSalesView/11589/False">
+                            <div class="hidden-print p24_loader">
+    <i class="fa fa-2x fa-spin fa-spinner"></i> 
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" /> Loading
+</div>
+                        </div>
+                    </section>
+
+
+
+                    <section class="p24_mT0 p24_agentContact">
+<section class="p24_listingCard js_analyticsV4BottomCard hidden-print">
+    <div class="row">
+        <div class="col-6">
+            <h4 class="p24_listingHeadings">Contact Agent</h4>
+<div class="hidden-print" id="ContactAgentBottom" itemscope itemtype="http://schema.org/ContactPage">
+    <div class="clearfix"></div>
+
+<form action="/to-rent/table-view/blouberg/western-cape/11589/117661901" class="p24_messageForm js_leadContactForm" method="post"><input id="ListingNumberText_LeadFormBottom" name="ListingNumberText" type="hidden" value="117661901" />        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                <input class="form-control p24_textInput" data-val="true" data-val-atleastoneletter="Please enter a valid name" data-val-maxlength="The field LeadContactName must be a string or array type with a maximum length of &#x27;301&#x27;." data-val-maxlength-max="301" data-val-nodigits="Please enter a valid name" data-val-noillegalnamechars="Please enter a valid name" data-val-nourlemailordomain="Please enter a valid name" data-val-regex="Name is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Name is required" maxlength="301" name="LeadContactName" placeholder="Your Name" type="text" value="" />
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconUser">
+                    <path d="M10.1334 9.05829C10.05 9.04996 9.95005 9.04996 9.85838 9.05829C7.87505 8.99163 6.30005 7.36663 6.30005 5.36663C6.30005 3.32496 7.95005 1.66663 10 1.66663C12.0417 1.66663 13.7001 3.32496 13.7001 5.36663C13.6917 7.36663 12.1167 8.99163 10.1334 9.05829Z" stroke="#0F0C36" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5.9666 12.1334C3.94993 13.4834 3.94993 15.6834 5.9666 17.025C8.25827 18.5584 12.0166 18.5584 14.3083 17.025C16.3249 15.675 16.3249 13.475 14.3083 12.1334C12.0249 10.6084 8.2666 10.6084 5.9666 12.1334Z" stroke="#0F0C36" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactName" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                 
+<input autocomplete="off" class="form-control" data-mailcheck="09e68c8c-b0a4-4033-badb-46c102a00fab" data-val="true" data-val-email="Please enter a valid email address." data-val-maxlength="The field LeadContactEmail must be a string or array type with a maximum length of &#x27;70&#x27;." data-val-maxlength-max="70" data-val-regex="Email is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Email is required." maxlength="70" name="LeadContactEmail" placeholder="Your Email" type="text" value="" />
+
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconUser">
+                    <path d="M13.4723 15.9027H6.52789C4.44455 15.9027 3.05566 14.8611 3.05566 12.4305V7.56939C3.05566 5.13883 4.44455 4.09717 6.52789 4.09717H13.4723C15.5557 4.09717 16.9446 5.13883 16.9446 7.56939V12.4305C16.9446 14.8611 15.5557 15.9027 13.4723 15.9027Z" stroke="#0F0C36" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M13.4723 7.91663L11.2987 9.65274C10.5834 10.2222 9.40977 10.2222 8.6945 9.65274L6.52783 7.91663" stroke="#0F0C36" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactEmail" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <div class="p24_mobileNumber p24_inputIconGroup">
+                <input class="form-control" name="ContactMobileNumber" placeholder="Mobile" type="text" value="" />
+                (* Please enter phone number so the agent can contact you.)
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconNumber">
+                    <path d="M16.6666 5.83329V14.1666C16.6666 17.5 15.8333 18.3333 12.4999 18.3333H7.49992C4.16659 18.3333 3.33325 17.5 3.33325 14.1666V5.83329C3.33325 2.49996 4.16659 1.66663 7.49992 1.66663H12.4999C15.8333 1.66663 16.6666 2.49996 16.6666 5.83329Z" stroke="#0F0C36" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M11.6666 4.58325H8.33325" stroke="#0F0C36" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="p24_inputIconGroup">
+                <input class="form-control" data-val="true" data-val-regex="Mobile number is invalid." data-val-regex-pattern="^(?!.{21,})\s*?(\&#x2B;\s*?2\s*?7\s*?\(\s*?0\s*?\)|\&#x2B;\s*?2\s*?7|2\s*?7|0)\s*?(((5(?:0|1|2)\s*?|6(?:0|1|2|3|4|5|6|7|8|9)\s*?|7(?:0|1|2|3|4|5|6|7|8|9)\s*?|8\s*?(?:1|2|3|4))\s*?((?:\d\s*?){7}))|((9600000|9600304|9600305|9600306|9600307|9602001|9602002|9602005|9602006|9602007|9602010|9602011|9603000|9603001|9603002|9603003|9609802|9609803)((?:\d\s*?){2}))|((96003015|96003016|96003017|96003018|96003019)((?:\d\s*?){1})))$" data-val-required="Mobile number is required." name="LeadContactMobileNumber" placeholder="Your Mobile Number" type="text" value="" />
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconNumber">
+                    <path d="M16.6666 5.83329V14.1666C16.6666 17.5 15.8333 18.3333 12.4999 18.3333H7.49992C4.16659 18.3333 3.33325 17.5 3.33325 14.1666V5.83329C3.33325 2.49996 4.16659 1.66663 7.49992 1.66663H12.4999C15.8333 1.66663 16.6666 2.49996 16.6666 5.83329Z" stroke="#0F0C36" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M11.6666 4.58325H8.33325" stroke="#0F0C36" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadContactMobileNumber" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group p24_leadMessageBody">
+            <div>
+                <textarea class="form-control" data-val="true" data-val-maxlength="Message length cannot exceed 600 characters." data-val-maxlength-max="600" data-val-minlength="Message must be more than 5 characters." data-val-minlength-min="6" data-val-regex="Message is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Message is required." data-val-stricturlblocking="The field contains a URL or domain, which is not allowed" maxlength="600" name="LeadMessageBody" placeholder="Message Body" rows="4">
+I&#x27;m interested in this property, please contact me.</textarea>
+            </div>
+            <span class="errorLabel field-validation-valid" data-valmsg-for="LeadMessageBody" data-valmsg-replace="true"></span>
+        </div>
+        <div class="clearfix"></div>
+        <button type="submit" class="btn btn-lg btn-block btn-success">
+            <span class="js_text">Send Message</span>
+
+<div class="hide p24_loader js_spinner">
+    <span class="p24_spinner p24_counterSpinner">
+        <span class="p24_dot-1"></span>
+        <span class="p24_dot-2"></span>
+        <span class="p24_dot-3"></span>
+    </span>
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+</div>        </button>
+<input name="__RequestVerificationToken" type="hidden" value="REDACTED_TOKEN" /></form></div>
+            <div class="p24_popiBeforeContinuing js_popiBeforeContinuing">
+    By continuing I understand and agree with Property24&rsquo;s
+    <a href="/terms-and-conditions" target="_blank" title="Terms and Conditions">Terms&nbsp;&amp;&nbsp;Conditions</a>
+    and
+    <a href="/privacy-policy" target="_blank" title="Privacy Policy">Privacy&nbsp;Policy</a>.
+</div>
+        </div>
+        <div class="col-6 noPadding-left">
+            <div class="p24_agent">
+                    <div class="p24_agentDetails">
+
+<div class="js_agentDetails p24_agentDetails" data-value="u3wlesy2w52ysmk6dpqd6hnbivxaimvmn52fnrq3xskbsfhcog5edw7wklmbj5uovy2gimnofsed3fvenr5gzjj74gcjqrdamt4u7fi" data-private-listing="false">
+    <div>
+        <div class="p24_agentPhoto">
+            <a href="/estate-agents/re-max-property-associates-western-cape/julius-illyes/3866" title="Agent profile for Julius Illyes">
+                <img src="https://images.prop24.com/120986503/UpperCrop200x200" alt="Agent profile for Julius Illyes" class="img-responsive js_agentPhoto" />
+            </a>
+        </div>
+        <div class="p24_agentInfo">
+            <h5 class="p24_agentName">
+                    <a href="/estate-agents/re-max-property-associates-western-cape/julius-illyes/3866">Julius Illyes</a>
+            </h5>
+        </div>
+    </div>
+    <div class="p24_contactButtons">
+
+<div data-react-component="Views_Listing_AgentContactNumberToggle" id="a52ef6328b0f4b829660d06e8c388a09">
+    <div class="p24_showNumbers js_hideShowContactToggle js_agentShowNumber">
+        <a href='javascript:;' title="Show Contact Number" class="js_contactNumbersLink js_hideAgentName btn btn-block">
+            <img src="/Content/images/Optimized/Icons/icon_call_updated.svg?z=36c5310a4224120405fd" alt="phone" class="js_icon" />
+            <span class="js_text p24_placeholder">Show Contact Number</span>
+        </a>
+    </div>
+</div>
+<script type="application/json" data-props-for="a52ef6328b0f4b829660d06e8c388a09">
+    {"isSpui":false,"showAgentName":false,"agentId":3866,"countryId":1,"listingNumber":{"number":117661901,"isValid":true},"value":"u3wlesy2w52ysmk6dpqd6hnbixnefp2psefqhvlhpfght6h2cidf7gemr73ybteb2pdkkxzyagb2xlmsqutxez66f2qvzxxbe34m4za"}
+</script>
+            <div class="clearfix"></div>
+
+<div data-react-component="Views_Listing_WhatsappAgentButton" id="9ec42f97c7b64155a47cafc1ecb97a26">
+    <div class="p24_showNumbers">
+        <a href='javascript:;' title="WhatsApp Agent" class="btn btn-block p24_contactWhatsAppCTA">
+            <img src="/Content/images/Optimized/Icons/icon_whatsapp_white.svg?z=a88f0a171d25f71cab5b" alt="WhatsApp" class="p24_iconNumber" />
+            <span class="p24_placeholder">WhatsApp Agent</span>
+        </a>
+    </div>
+</div>
+<script type="application/json" data-props-for="9ec42f97c7b64155a47cafc1ecb97a26">
+    {"agentId":3866,"defaultContactMessage":"I\u0027m interested in this property, please contact me."}
+</script>    </div>
+
+</div>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+                    </section>
+                </main>
+                <aside class="p24_listingSidebar">
+                    <div class="p24_sidebar">
+
+
+
+
+
+
+
+<section class="p24_listingCard js-p24-leadform p24_leadAgentContactSidebar js_analyticsV4SideCard" id="contact-agent-side-bar" itemscope itemtype="http://schema.org/ContactPage">
+    <div class="p24_contact p24_leadAgentContactSidebar__contact p24_leadAgentContactSidebar__contact_anyButtons">
+        <h4 class="p24_listingHeadings text-center p24_leadAgentContactSidebar__heading">Contact Agent</h4>
+            <div id="ContactDetails" class="p24_contactOptionWrapper p24_leadAgentContactSidebar__contactOptions" data-value="qque5rrubcl4q6f4rh7cziujw4da7di65ze4qcvcaukmq7gr4w23fysawbhi74fgnm5vmes3zvcl2">
+
+<div data-react-component="Views_Listing_AgentContactNumberToggle" id="5120265c3b014541ab7bdc5de14a708e">
+    <div class="p24_showNumbers js_hideShowContactToggle js_agentShowNumber">
+        <a href='javascript:;' title="Show Contact Number" class="js_contactNumbersLink  btn btn-block">
+            <img src="/Content/images/Optimized/Icons/icon_call_updated.svg?z=36c5310a4224120405fd" alt="phone" class="js_icon" />
+            <span class="js_text p24_placeholder">Show Contact Number</span>
+        </a>
+    </div>
+</div>
+<script type="application/json" data-props-for="5120265c3b014541ab7bdc5de14a708e">
+    {"isSpui":false,"showAgentName":true,"agentId":0,"countryId":1,"listingNumber":{"number":117661901,"isValid":true},"value":"m3jmjsotgtok4rwudzvff4boicbrzbvykr7slf4coliubdhhuv4yqjmqfwtx374mdcpx32zp5h2hm"}
+</script>                    <div class="clearfix"></div>
+
+<div data-react-component="Views_Listing_WhatsappAgentButton" id="382a9d33bf1a4734a9be226bfa93a590">
+    <div class="p24_showNumbers">
+        <a href='javascript:;' title="WhatsApp Agent" class="btn btn-block p24_contactWhatsAppCTA">
+            <img src="/Content/images/Optimized/Icons/icon_whatsapp_white.svg?z=a88f0a171d25f71cab5b" alt="WhatsApp" class="p24_iconNumber" />
+            <span class="p24_placeholder">WhatsApp Agent</span>
+        </a>
+    </div>
+</div>
+<script type="application/json" data-props-for="382a9d33bf1a4734a9be226bfa93a590">
+    {"agentId":0,"defaultContactMessage":"I\u0027m interested in this property, please contact me."}
+</script>            </div>
+    </div>
+<form action="/to-rent/table-view/blouberg/western-cape/11589/117661901" class="hidden-print p24_contactForm js_leadContactForm p24_leadAgentContactSidebar__form" method="post"><input id="ListingNumberText_LeadAgentSidebar" name="ListingNumberText" type="hidden" value="117661901" />            <div class="form-group p24_leadAgentContactSidebar__field">
+                <div class="p24_inputIconGroup p24_leadAgentContactSidebar__inputGroup">
+                    <input class="form-control p24_leadAgentContactSidebar__input" data-val="true" data-val-atleastoneletter="Please enter a valid name" data-val-maxlength="The field LeadContactName must be a string or array type with a maximum length of &#x27;301&#x27;." data-val-maxlength-max="301" data-val-nodigits="Please enter a valid name" data-val-noillegalnamechars="Please enter a valid name" data-val-nourlemailordomain="Please enter a valid name" data-val-regex="Name is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Name is required" maxlength="301" name="LeadContactName" placeholder="Your Name" type="text" value="" />
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconUser p24_leadAgentContactSidebar__icon p24_leadAgentContactSidebar__icon--user">
+                        <path d="M10.1334 9.05829C10.05 9.04996 9.95005 9.04996 9.85838 9.05829C7.87505 8.99163 6.30005 7.36663 6.30005 5.36663C6.30005 3.32496 7.95005 1.66663 10 1.66663C12.0417 1.66663 13.7001 3.32496 13.7001 5.36663C13.6917 7.36663 12.1167 8.99163 10.1334 9.05829Z" stroke="#0F0C36" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M5.9666 12.1334C3.94993 13.4834 3.94993 15.6834 5.9666 17.025C8.25827 18.5584 12.0166 18.5584 14.3083 17.025C16.3249 15.675 16.3249 13.475 14.3083 12.1334C12.0249 10.6084 8.2666 10.6084 5.9666 12.1334Z" stroke="#0F0C36" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <span class="errorLabel p24_leadAgentContactSidebar__error field-validation-valid" data-valmsg-for="LeadContactName" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group p24_leadAgentContactSidebar__field">
+                <div class="p24_inputIconGroup p24_leadAgentContactSidebar__inputGroup">
+                     
+<input autocomplete="off" class="form-control p24_leadAgentContactSidebar__input" data-mailcheck="463ab242-72e9-48db-9732-04d7fec1ccf7" data-val="true" data-val-email="Please enter a valid email address." data-val-maxlength="The field LeadContactEmail must be a string or array type with a maximum length of &#x27;70&#x27;." data-val-maxlength-max="70" data-val-regex="Email is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Email is required." maxlength="70" name="LeadContactEmail" placeholder="Your Email" type="text" value="" />
+
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconUser p24_leadAgentContactSidebar__icon p24_leadAgentContactSidebar__icon--user">
+                        <path d="M13.4723 15.9027H6.52789C4.44455 15.9027 3.05566 14.8611 3.05566 12.4305V7.56939C3.05566 5.13883 4.44455 4.09717 6.52789 4.09717H13.4723C15.5557 4.09717 16.9446 5.13883 16.9446 7.56939V12.4305C16.9446 14.8611 15.5557 15.9027 13.4723 15.9027Z" stroke="#0F0C36" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13.4723 7.91663L11.2987 9.65274C10.5834 10.2222 9.40977 10.2222 8.6945 9.65274L6.52783 7.91663" stroke="#0F0C36" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <span class="errorLabel p24_leadAgentContactSidebar__error field-validation-valid" data-valmsg-for="LeadContactEmail" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group p24_mobileNumber p24_leadAgentContactSidebar__field">
+                <div class="p24_inputIconGroup p24_leadAgentContactSidebar__inputGroup">
+                    <input class="form-control p24_leadAgentContactSidebar__input" name="ContactMobileNumber" placeholder="Mobile" type="text" value="" />
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconNumber p24_leadAgentContactSidebar__icon p24_leadAgentContactSidebar__icon--number">
+                        <path d="M16.6666 5.83329V14.1666C16.6666 17.5 15.8333 18.3333 12.4999 18.3333H7.49992C4.16659 18.3333 3.33325 17.5 3.33325 14.1666V5.83329C3.33325 2.49996 4.16659 1.66663 7.49992 1.66663H12.4999C15.8333 1.66663 16.6666 2.49996 16.6666 5.83329Z" stroke="#0F0C36" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11.6666 4.58325H8.33325" stroke="#0F0C36" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                (* Please enter phone number so the agent can contact you.)
+            </div>
+            <div class="form-group p24_leadAgentContactSidebar__field">
+                <div class="p24_inputIconGroup p24_leadAgentContactSidebar__inputGroup">
+                    <input class="form-control p24_leadAgentContactSidebar__input" data-val="true" data-val-regex="Mobile number is invalid." data-val-regex-pattern="^(?!.{21,})\s*?(\&#x2B;\s*?2\s*?7\s*?\(\s*?0\s*?\)|\&#x2B;\s*?2\s*?7|2\s*?7|0)\s*?(((5(?:0|1|2)\s*?|6(?:0|1|2|3|4|5|6|7|8|9)\s*?|7(?:0|1|2|3|4|5|6|7|8|9)\s*?|8\s*?(?:1|2|3|4))\s*?((?:\d\s*?){7}))|((9600000|9600304|9600305|9600306|9600307|9602001|9602002|9602005|9602006|9602007|9602010|9602011|9603000|9603001|9603002|9603003|9609802|9609803)((?:\d\s*?){2}))|((96003015|96003016|96003017|96003018|96003019)((?:\d\s*?){1})))$" data-val-required="Mobile number is required." name="LeadContactMobileNumber" placeholder="Your Mobile Number" type="text" value="" />
+
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="p24_iconNumber p24_leadAgentContactSidebar__icon p24_leadAgentContactSidebar__icon--number">
+                        <path d="M16.6666 5.83329V14.1666C16.6666 17.5 15.8333 18.3333 12.4999 18.3333H7.49992C4.16659 18.3333 3.33325 17.5 3.33325 14.1666V5.83329C3.33325 2.49996 4.16659 1.66663 7.49992 1.66663H12.4999C15.8333 1.66663 16.6666 2.49996 16.6666 5.83329Z" stroke="#0F0C36" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11.6666 4.58325H8.33325" stroke="#0F0C36" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                </div>
+                <span class="errorLabel p24_leadAgentContactSidebar__error field-validation-valid" data-valmsg-for="LeadContactMobileNumber" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group p24_leadMessageBody p24_leadAgentContactSidebar__field">
+                <textarea class="form-control p24_leadAgentContactSidebar__textarea" data-val="true" data-val-maxlength="Message length cannot exceed 600 characters." data-val-maxlength-max="600" data-val-minlength="Message must be more than 5 characters." data-val-minlength-min="6" data-val-regex="Message is required." data-val-regex-pattern=".*[^ ].*" data-val-required="Message is required." data-val-stricturlblocking="The field contains a URL or domain, which is not allowed" id="LeadMessageBody" maxlength="600" name="LeadMessageBody" placeholder="Message Body" rows="4">
+I&#x27;m interested in this property, please contact me.</textarea>
+                <span class="errorLabel p24_textAreaSuggestion p24_leadAgentContactSidebar__error field-validation-valid" data-valmsg-for="LeadMessageBody" data-valmsg-replace="true"></span>
+            </div>
+            <button type="submit" class="btn btn-block btn-success p24_leadAgentContactSidebar__submit">
+                <span class="js_text">Send Message</span>
+
+<div class="hide p24_loader js_spinner">
+    <span class="p24_spinner p24_counterSpinner">
+        <span class="p24_dot-1"></span>
+        <span class="p24_dot-2"></span>
+        <span class="p24_dot-3"></span>
+    </span>
+    <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+</div>            </button>
+<input name="__RequestVerificationToken" type="hidden" value="REDACTED_TOKEN" /></form>    <div class="p24_popiBeforeContinuing p24_leadAgentContactSidebar__terms">
+        By continuing I understand and agree with
+        <br />
+        Property24's
+        <a href="/terms-and-conditions" target="_blank" title="Terms and Conditions">Terms&nbsp;&amp;&nbsp;Conditions</a>
+        and
+        <a href="/privacy-policy" target="_blank" title="Privacy Policy">Privacy&nbsp;Policy</a>.
+    </div>
+</section>
+
+
+
+
+    <div class="js_analyticsV4RightSideAgentCard p24_agency" id="p24_listingAgency">
+            <div class="p24_listingCard">
+                    <a href="/to-rent/agency/re-max-property-associates-western-cape/8454" class="p24_agencyLogo">
+                        <img src="https://images.prop24.com/362885401/Fit450x225" alt="Property to rent by RE/MAX Property Associates - Western Cape" class="img-responsive" />
+                    </a>
+                    <div class="clearfix"></div>
+                    <a href="/to-rent/agency/re-max-property-associates-western-cape/8454" title="View all properties to rent" class="hidden-print p24_agencyLogoName">
+                        <span>RE/MAX Property Associates - Western Cape</span>
+                    </a>
+            </div>
+
+                <div class="p24_listingCard p24_agent hidden-print">
+
+<div class="js_agentDetails p24_agentDetails" data-value="u3wlesy2w52ysmk6dpqd6hnbix6iqdqvgkdjk3ryhikms4qccqcnoakn6eqicciroe6fpuw734go2pqdbi4773bh32oyixraglf2cli" data-private-listing="false">
+    <div>
+        <div class="p24_agentPhoto">
+            <a href="/estate-agents/re-max-property-associates-western-cape/julius-illyes/3866" title="Agent profile for Julius Illyes">
+                <img src="https://images.prop24.com/120986503/UpperCrop200x200" alt="Agent profile for Julius Illyes" class="img-responsive js_agentPhoto" />
+            </a>
+        </div>
+        <div class="p24_agentInfo">
+            <h5 class="p24_agentName">
+                    <a href="/estate-agents/re-max-property-associates-western-cape/julius-illyes/3866">Julius Illyes</a>
+            </h5>
+        </div>
+    </div>
+    <div class="p24_contactButtons">
+
+<div data-react-component="Views_Listing_AgentContactNumberToggle" id="f6cc746b80814d4687cc67d8c81a3e20">
+    <div class="p24_showNumbers js_hideShowContactToggle js_agentShowNumber">
+        <a href='javascript:;' title="Show Contact Number" class="js_contactNumbersLink js_hideAgentName btn btn-block">
+            <img src="/Content/images/Optimized/Icons/icon_call_updated.svg?z=36c5310a4224120405fd" alt="phone" class="js_icon" />
+            <span class="js_text p24_placeholder">Show Contact Number</span>
+        </a>
+    </div>
+</div>
+<script type="application/json" data-props-for="f6cc746b80814d4687cc67d8c81a3e20">
+    {"isSpui":false,"showAgentName":false,"agentId":3866,"countryId":1,"listingNumber":{"number":117661901,"isValid":true},"value":"u3wlesy2w52ysmk6dpqd6hnbivdrlsdv7lezwoz2w3ru6l56nbpsbvmrrkv644rsvdr2hq4d74k74myv7l7vajbhgkzndjv4s3fm2oa"}
+</script>
+            <div class="clearfix"></div>
+
+<div data-react-component="Views_Listing_WhatsappAgentButton" id="8f3a8eb483444d78bf8d2f89ddfafe11">
+    <div class="p24_showNumbers">
+        <a href='javascript:;' title="WhatsApp Agent" class="btn btn-block p24_contactWhatsAppCTA">
+            <img src="/Content/images/Optimized/Icons/icon_whatsapp_white.svg?z=a88f0a171d25f71cab5b" alt="WhatsApp" class="p24_iconNumber" />
+            <span class="p24_placeholder">WhatsApp Agent</span>
+        </a>
+    </div>
+</div>
+<script type="application/json" data-props-for="8f3a8eb483444d78bf8d2f89ddfafe11">
+    {"agentId":3866,"defaultContactMessage":"I\u0027m interested in this property, please contact me."}
+</script>    </div>
+
+</div>
+                </div>
+    </div>
+
+
+
+<div class="p24_listingCard js_sidebarSocial p24_share hidden-print">
+
+
+<div class="p24_social">
+        <h4 class="p24_listingHeadings text-center">Share</h4>
+    <div class="m-flex m-justify-center m-align-center">
+        <a href="https://www.property24.com/to-rent/table-view/blouberg/western-cape/11589/117661901?utm_source=facebook&amp;utm_medium=referral&amp;utm_campaign=socialmedia" title="Share on Facebook" class="share-social-button-facebook js_facebookShare">
+            <img src="/Content/images/Optimized/Icons/icon_facebook_social.svg?z=a4ca447a6b4b31b557b1" alt="Facebook" />
+        </a>
+        <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fwww.property24.com%2fto-rent%2ftable-view%2fblouberg%2fwestern-cape%2f11589%2f117661901%3futm_source%3dx%26utm_medium%3dreferral%26utm_campaign%3dsocialmedia&text=2 Bedroom Apartment / flat to rent in Table View, Blouberg R 13 000 : Property24" title="Share on Twitter" class="share-social-button-twitter">
+            <img src="/Content/images/Optimized/Icons/icon_twitter_social_dark.svg?z=1b75a5a3d602c7a11854" alt="Twitter" />
+        </a>
+        <a href="https://api.whatsapp.com/send?text=Check out this property I found on Property24! https%3a%2f%2fwww.property24.com%2fto-rent%2ftable-view%2fblouberg%2fwestern-cape%2f11589%2f117661901%3futm_source%3dwhatsapp%26utm_medium%3dreferral%26utm_campaign%3dsocialmedia" target="_blank" data-action="share/whatsapp/share" title="Share on WhatsApp" class="share-social-button-whatsapp">
+            <img src="/Content/images/Optimized/Icons/icon_whatsapp_social.svg?z=baa384371fb9f6e1c994" alt="WhatsApp" />
+        </a>
+        <a href="#EmailModal" title="Email" data-toggle="modal" data-target="#EmailModal" class="share-email">
+            <img src="/Content/images/Optimized/Icons/icon_message_social.svg?z=5dd1e928fbe3963c1295" alt="Email" />
+        </a>
+
+
+<div class="modal fade p24_modal p24_small p24_emailDialogue" id="EmailModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img src="/Content/images/Optimized/Icons/icon_close_grey.png?z=1cc08bf7b63ad90d18b7" alt="Close" class="p24_close" data-dismiss="modal" aria-label="Close" />
+                        <div class="clearfix"></div>
+                        <h5>
+                            <span class="title">Send Listing to:</span>
+                        </h5>
+<form action="/GeneralSession/SendEmail" class="p24_emailForm" id="EmailForm" method="post" novalidate="">                            <div class="form-group js_58714390">
+                                <label class="control-label" for="ToEmail">To email*</label>
+                                 
+<input class="form-control p24_input" data-mailcheck="a874301d-5288-4cd4-a42c-11275865bc5e" data-mailcheck-parent="js_58714390" data-val="true" data-val-email="This is not a valid email address" data-val-required="This field is required" id="ToEmail" name="ToEmail" placeholder="To Email" type="text" value="" />
+
+                            </div>
+                            <div class="form-group js_58714390">
+                                <label class="control-label" for="FromEmail">From email*</label>
+                                 
+<input class="form-control p24_input" data-mailcheck="56099def-3890-4a49-82a0-1ad525e5f629" data-mailcheck-parent="js_58714390" data-val="true" data-val-email="This is not a valid email address" data-val-required="This field is required" id="FromEmail" name="FromEmail" placeholder="From Email" type="text" value="" />
+
+                            </div>
+<span class="text-danger field-validation-valid" data-valmsg-for="FromEmail" data-valmsg-replace="true"></span>                            <div class="form-group">
+                                <label class="control-label" for="Message">Optional Message</label>
+                                <textarea class="form-control" id="Message" name="Message" placeholder="Optional Message" rows="5">
+</textarea>
+                            </div>
+<input id="PostData" name="PostData" type="hidden" value="P24-117661901," /><input data-val="true" data-val-required="The PostDataType field is required." id="PostDataType" name="PostDataType" type="hidden" value="Listing" /><input id="DevelopmentContext" name="DevelopmentContext" type="hidden" value="Rental" />                            <div class="form-group">
+                                <span id="EmailResultText" class="hide">
+                                </span>
+                                <button type="button" class="pull-right btn btn-success" id="SendEmail">
+                                    <span>Send</span>
+                                    <i class="fa fa-spinner fa-spin hide"></i>
+                                </button>
+                                <button type="button" class="pull-right btn btn-default" id="CancelEmail" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            </div>
+<input name="__RequestVerificationToken" type="hidden" value="REDACTED_TOKEN" /></form>                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    </div>
+</div>
+
+   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"Share","props":{"googleIdSelector":"google-share","facebookClassSelector":"js_facebookShare"},"type":"c"}));
+   </script>
+    <div class="clearfix"></div>
+</div>
+
+<div class="p24_listingCard js_sidebarSocial p24_share hidden-print">
+    <div class="p24_altOptions">
+        <a href="javascript:;" title="Print" onclick="window.print();">
+            <img src="/Content/images/Optimized/Icons/icon_print_updated.svg?z=2c9f33a25daac12b9ecd" alt="Print" />Print
+        </a>
+<form action="/Listing/DownloadBrochure?ListingNumber=P24-117661901" class="p24_downloadBrochure" method="post">            <img src="/Content/images/Optimized/Icons/icon_download_brochure.svg?z=42bd34be5b6700c8caac" alt="Brochure" />
+            <input id="brochure-download" class="p24_submitInput" type="submit" value="Download Brochure" />
+            <input type="hidden" name="BrochureRecaptchaToken" />
+<input name="__RequestVerificationToken" type="hidden" value="REDACTED_TOKEN" /></form>
+<div data-react-component="Client_ReportListing_ReportListing" id="d473bae73f9c438dba83cc1753515a06">
+        <a href="#" class="p24_reportListingLink">
+            <img src="/Content/images/Optimized/Icons/icon_flag_updated.svg?z=9871eb3eb369dd79ca93" alt="Report" />Report Listing
+        </a>
+</div>
+<script type="application/json" data-props-for="d473bae73f9c438dba83cc1753515a06">
+    {"messageCharLimit":500,"soleMandateMaxFileSize":10,"soleMandateFileContentType":"application/pdf","mandateId":40202481,"listingReported":false,"userIsLoggedIn":false,"isGroupedListing":false,"loggedInUserName":"","loggedInUserEmail":"","isSmartphone":false,"whoAreYouSelectList":[{"text":"Consumer","value":1},{"text":"Estate Agent","value":2}],"consumerIssueSelectList":[{"text":"Property is no longer available","value":1},{"text":"Agent did not contact me","value":2},{"text":"Incorrect information/photos","value":3}],"agentIssueSelectList":[{"text":"Property is no longer available","value":1},{"text":"Duplicate listing","value":2},{"text":"Grouped listing","value":3},{"text":"Incorrect information/photos","value":4},{"text":"Mandate (sole, dual, joint, etc.)","value":5}],"incorrectInformationSelectList":[{"text":"Location (suburb, street address, map, etc.)","value":1},{"text":"Photographs","value":2},{"text":"Media (video, 3D tour)","value":3},{"text":"Price","value":4},{"text":"Property details (erf/floor area, description, features, etc.)","value":5}]}
+</script>
+<script>
+    addCallback(function() {
+        if ("#ReportListingSurveyModal" === window.location.hash) {
+            $("#ReportListingSurveyModal").modal("show");
+        }
+    });
+</script>    </div>
+    <div class="clearfix"></div>
+</div>                    </div>
+                </aside>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<div id="google_conversion" class="hide"></div>
+
+
+<div data-react-component="Views_Listing_ContactAgentMediaGalleryModal" id="75883b45e53d4229b75cd3a617ccc891"></div>
+<script type="application/json" data-props-for="75883b45e53d4229b75cd3a617ccc891">
+    {"defaultContactMessage":"I\u0027m interested in this property, please contact me."}
+</script>
+
+<div id="media-gallery-modal" class="modal fade p24_modal p24_galleryModal" tabindex="-1" role="dialog" data-backdrop="static">
+    <img src="/Content/images/Optimized/Icons/icon_close_white.svg?z=021afab086e6969eed35" alt="Close" class="p24_dummy" />
+    <div id="gallery-top" class="p24_top">
+
+        <div class="p24_mediaDescription">
+            <span class="p24_price">R 13 000</span>
+            <span class="p24_pipe">|</span>
+            <span class="p24_title">2 Bedroom Apartment / flat to rent in Table View</span>
+        </div>
+        <div class="p24_rightControls">
+            <div id="gallery-media-tabs" class="p24_mediaTabs">
+
+    <div class="p24_mediaTab js_mediaTab p24_activeTab" data-id="#gallery-photos"><img src="/Content/images/Optimized/Icons/icon_photo_updated.svg?z=2c677ffbb452c7f4aa0f" /><span>Photos (10)</span></div>
+
+    <div class="p24_mediaTab js_mediaTab js_showThumbnailGallery" data-id="#gallery-thumbnails">
+        <img src="/Content/images/Optimized/Icons/icon_grid_updated.svg?z=f68c47401fe56380fb6f" alt="Photo Grid" /> <span>Photo Grid</span>
+    </div>
+
+
+
+
+            </div>
+            <div id="contact-agent-media-gallery-modal"></div>
+            <a id="gallery-zoom" href="javascript:;" class="hide p24_zoomControls">
+                <img src="/Content/images/Optimized/Icons/search-plus.svg?z=891b682b8bf9b9b0df74" alt="Zoom In" />
+                <img src="/Content/images/Optimized/Icons/search-minus.svg?z=870686279263ef7efd42" class="hide" alt="Zoom Out" />
+            </a>
+            <a id="gallery-fullscreen" class="p24_fullScreenTab" href="javascript:;" title="Enter Fullscreen">
+                <i class="fa fa-lg fa-expand"></i>
+            </a>
+            <a id="gallery-compress" href="javascript:;" title="Exit Fullscreen" class="hide">
+                <i class="fa fa-lg fa-compress"></i>
+            </a>
+            <a id="gallery-close" href="javascript:;" title="Close" data-dismiss="modal" aria-label="Close">
+                <img src="/Content/images/Optimized/Icons/icon_close_white_updated.svg?z=5918c92b551f4ecc1401" class="p24_closeIcon" alt="Close" />
+            </a>
+        </div>
+    </div>
+
+        <div class="p24_loader js_lightboxSpinner hide">
+            <i class="fa fa-2x fa-spin fa-spinner"></i>
+            <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+        </div>
+        <div id="gallery-photos" class="p24_mediaHolder js_mediaHolder">
+            <div class="p24_photos js_lightboxImageWrapper">
+                <img class="img-responsive js_lightboxImage" />
+            </div>
+            <a title="Previous" class="js_lightboxPrevious p24_previous">
+                <i class="fa fa-4x fa-angle-left"></i>
+            </a>
+            <a title="Next" class="js_lightboxNext p24_next">
+                <i class="fa fa-4x fa-angle-right"></i>
+            </a>
+            <div class="js_lightboxImageCaption p24_caption"></div>
+            <div class="p24_count">
+                <span class="js_lightboxImagePosition"></span> / <span>10</span>
+            </div>
+
+                <div class="p24_thumbnailsIcon js_showThumbnailGallery" data-gallery="true">
+                    <img src="/Content/images/Optimized/Icons/grid_icon_clean.svg?z=55f691d3f5ec1971df80" alt="Thumbnail Gallery" /><span> Photo Grid</span>
+                </div>
+        </div>
+            <div id="gallery-thumbnails" class="p24_mediaHolder hide" data-id="#gallery-thumbnails">
+                <div id="gallery-scrollable-container" class="p24_scrollable">
+                    <div class="p24_thumbnailContainer">
+                            <div class="row js_thumbnailRow">
+                                    <div class="col-4 p24_galleryThumbnail">
+                                        <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/382900703/Crop320x213" alt="Listing number: P24-117661901, Image number: 1" data-index="1" />
+                                    </div>
+                                    <div class="col-4 p24_galleryThumbnail">
+                                        <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/382900710/Crop320x213" alt="Listing number: P24-117661901, Image number: 2" data-index="2" />
+                                    </div>
+                                    <div class="col-4 p24_galleryThumbnail">
+                                        <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/382900713/Crop320x213" alt="Listing number: P24-117661901, Image number: 3" data-index="3" />
+                                    </div>
+                            </div>
+                            <div class="row js_thumbnailRow">
+                                    <div class="col-4 p24_galleryThumbnail">
+                                        <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/382900717/Crop320x213" alt="Listing number: P24-117661901, Image number: 4" data-index="4" />
+                                    </div>
+                                    <div class="col-4 p24_galleryThumbnail">
+                                        <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/382900719/Crop320x213" alt="Listing number: P24-117661901, Image number: 5" data-index="5" />
+                                    </div>
+                                    <div class="col-4 p24_galleryThumbnail">
+                                        <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/382900721/Crop320x213" alt="Listing number: P24-117661901, Image number: 6" data-index="6" />
+                                    </div>
+                            </div>
+                            <div class="row js_thumbnailRow">
+                                    <div class="col-4 p24_galleryThumbnail">
+                                        <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/382900723/Crop320x213" alt="Listing number: P24-117661901, Image number: 7" data-index="7" />
+                                    </div>
+                                    <div class="col-4 p24_galleryThumbnail">
+                                        <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/382900725/Crop320x213" alt="Listing number: P24-117661901, Image number: 8" data-index="8" />
+                                    </div>
+                                    <div class="col-4 p24_galleryThumbnail">
+                                        <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/382900726/Crop320x213" alt="Listing number: P24-117661901, Image number: 9" data-index="9" />
+                                    </div>
+                            </div>
+                            <div class="row js_thumbnailRow">
+                                    <div class="col-4 p24_galleryThumbnail">
+                                        <img class="lazy-image js_galleryThumbnail " src="/Content/images/NoImage/black_320x213.png?z=f87cf224c1c467755ae1" lazy-src="https://images.prop24.com/382900727/Crop320x213" alt="Listing number: P24-117661901, Image number: 10" data-index="10" />
+                                    </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+</div>
+<div class="hidden-print p24_footer">
+    <div class="p24_areas">
+        <div class="container">
+            <div class="row">
+                    <div class="col-2-4 p24_areaHeading">
+                                <a href="/to-rent/blouberg/western-cape/658" title="Property and houses to rent in Blouberg : Blouberg Property : Property24.com" class="p24_bold">Property to rent in Blouberg</a>
+                    </div>
+                    <div class="col-2-4 p24_areaHeading">
+                                <a href="/to-rent/western-cape/9" title="Property to rent in Western Cape : Property and houses to rent in Western Cape : Property24.com" class="p24_bold">Property to rent in Western Cape</a>
+                    </div>
+                    <div class="col-2-4 p24_areaHeading">
+                    </div>
+                    <div class="col-2-4 p24_areaHeading">
+                    </div>
+                    <div class="col-2-4 p24_areaHeading">
+                    </div>
+            </div>
+            <div class="row">
+                    <div class="col-2-4">
+                        <ul>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/beachfront/blouberg/western-cape/25759" title="Beachfront Property : Property and houses to rent in Beachfront : Property24.com">Beachfront</a>
+                                </li>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/big-bay/blouberg/western-cape/11579" title="Big Bay Property : Property and houses to rent in Big Bay : Property24.com">Big Bay</a>
+                                </li>
+                        </ul>
+                    </div>
+                    <div class="col-2-4">
+                        <ul>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/bloubergrant/blouberg/western-cape/11587" title="Bloubergrant Property : Property and houses to rent in Bloubergrant : Property24.com">Bloubergrant</a>
+                                </li>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/bloubergstrand/blouberg/western-cape/11580" title="Bloubergstrand Property : Property and houses to rent in Bloubergstrand : Property24.com">Bloubergstrand</a>
+                                </li>
+                        </ul>
+                    </div>
+                    <div class="col-2-4">
+                        <ul>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/parklands/blouberg/western-cape/11588" title="Parklands Property : Property and houses to rent in Parklands : Property24.com">Parklands</a>
+                                </li>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/parklands-north/blouberg/western-cape/15136" title="Parklands North Property : Property and houses to rent in Parklands North : Property24.com">Parklands North</a>
+                                </li>
+                        </ul>
+                    </div>
+                    <div class="col-2-4">
+                        <ul>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/sandown/blouberg/western-cape/16739" title="Sandown, Blouberg Property : Property and houses to rent in Sandown, Blouberg : Property24.com">Sandown</a>
+                                </li>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/table-view/blouberg/western-cape/11589" title="Table View Property : Property and houses to rent in Table View : Property24.com">Table View</a>
+                                </li>
+                        </ul>
+                    </div>
+                    <div class="col-2-4">
+                        <ul>
+                                <li class="p24_areaItem">
+                                    <a href="/to-rent/west-beach/blouberg/western-cape/11586" title="West Beach, Blouberg Property : Property and houses to rent in West Beach, Blouberg : Property24.com">West Beach</a>
+                                </li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="container p24_moreFooter">
+        <div class="row">
+            <div class="col-8">
+                <a href="/to-rent" title="Property to rent: Houses to rent: Property24">
+                    <img src="/Content/images/Optimized/Logos/footer_logo_white_large.svg?z=8108a8253dc9f8d0d0d1" alt = "Property to rent: Houses to rent: Property24" class="p24_footerLogo" />
+                </a>
+            </div>
+            <div class="col-4">
+                <div class="p24_socials">
+                    <a href="https://www.instagram.com/property24_sa/" target="_blank" title="Find Property24 on Instagram" class=""><img src="/Content/images/Optimized/Icons/icon_instagram_rounded.svg?z=befcb56eeefeca2b7157" alt="instagram" /></a>
+                    <a href="https://www.facebook.com/property24" target="_blank" title="Find Property24 on Facebook" class=""><img src="/Content/images/Optimized/Icons/icon_facebook_rounded.svg?z=38bfdb8180de4b2ec66a" alt="facebook" /></a>
+                    <a href="https://twitter.com/Property24" target="_blank" title="Find Property24 on Twitter" class=""><img src="/Content/images/Optimized/Icons/icon_twitter_rounded.svg?z=a4e31f27df144d88a0ea" alt="twitter" /></a>
+                    <a href="https://www.youtube.com/user/Property24" target="_blank" title="Find Property24 on Youtube" class=""><img src="/Content/images/Optimized/Icons/icon_youtube_rounded.svg?z=4e7743d439878c62a49f" alt="youtube" /></a>
+                    <a href="https://www.pinterest.com/property24/" target="_blank" title="Find Property24 on Pinterest" class=""><img src="/Content/images/Optimized/Icons/icon_pinterest_rounded.svg?z=d70f8a6856fc28aea94c" alt="pinterest" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 p24_postFooter">
+                <div class="row">
+                    <div class="col-4">
+                        <ul>
+                            <li>
+                                <a href="/about-us">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/contact-us">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="/feedback">Feedback</a>
+                            </li>
+                            <li>
+                                <a href="/sitemap">Sitemap</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <ul>
+                            <li>
+                                <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+                            </li>
+                            <li>
+                                <a href="/privacy-policy">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="/cookie-policy">Cookie Policy</a>
+                            </li>
+                            <li>
+                                <a href="/paia-manual">PAIA Manual</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <ul>
+                            <li>
+                                <a href="/careers">Join Our Team</a>
+                            </li>
+                            <li>
+                                <a href="https://manage.property24.com/">Agent Zone</a>
+                            </li>
+                            <li>
+                                <a href="/products/products-overview">Agency Products</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="p24_copyright">Copyright &#xA9; 2026 Property24</div>
+            </div>
+            <div class="col-4">
+                <div class="pull-right">
+                    <p class="p24_bold p24_downloadTitle p24_mB0">Download the App</p>
+                    <div class="p24_appLogos">
+                        <a href="https://itunes.apple.com/za/app/property24.com-property-for/id486012121?mt=8" alt="Available on the App Store" class="p24_storeIcon"><img src="/Content/images/Optimized/Icons/footer_apple_store.svg?z=5de7839dd2c149b09824" alt="Available on the App Store" /></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.korbitec.property24" alt="Android app on Google play" class="p24_storeIcon"><img src="/Content/images/Optimized/Icons/footer_google_store.svg?z=c8260857661db3a84c9d" alt="Available on the App Store" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="cookieConsentWrapper" class="p24_cookieWrapper">
+        <div class="p24_cookieBanner" role="alert">
+            <div class="p24_text">
+                <h4>Cookie Notice</h4>
+                <div>We use cookies that are essential for this website to function and to improve your user experience. Please refer to our
+                    <a id="cookiePolicyLink" href="/cookie-policy" target="_blank">cookie policy</a>.</div>
+            </div>
+            <div class="p24_button">
+                <button id="cookieBannerClose" type="button" class="btn btn-default">Close</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function hideCookieBanner() {
+            let expiryDate = new Date((new Date().getTime()) + 31536000000);
+            document.cookie = "P24CPA=2021-06-29T00:27:41.2870000;path=/;domain=.property24.com;SameSite=Lax;Secure;expires=" + expiryDate.toUTCString();
+            document.querySelector("#cookieConsentWrapper").classList.add("hidden");
+        }
+
+        (function () {
+            document.getElementById("cookiePolicyLink").addEventListener("click", hideCookieBanner, false);
+            document.getElementById("cookieBannerClose").addEventListener("click", hideCookieBanner, false);
+        })();
+    </script>
+</div>
+
+
+<script type="text/javascript">
+    addCallback(function () {
+    window.app.setLeadContextId("none")
+    });
+</script>
+
+   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"ListingViewDesktop","props":{"imageCount":10,"imageFocus":1,"allowImageEnlarge":true,"displayDesktopThumbnailsCard":true,"canShowAgentContactNumber":true,"canShowAgentContactWhatsApp":true,"contactAgentIsAdminUser":false,"listingShowContactNumbersActionUrl":"/Listing/ShowContactNumbers","listingShowContactEmailsActionUrl":"/Listing/ShowContactEmails","isAdminLeadFieldId":"IsAdminLead","displayPreviewListingFloatingBar":false},"type":"c"}));
+   </script>
+
+   <script type="text/javascript">
+       window.loader.addCallback((renderComponent) => renderComponent({"name":"BondCalculatorsDesktop","props":{"logUrl":"https://www.property24.com/calculators/logmortgagecalc","propertyTypeId":5,"containerSelector":".js_bondCard","isInModal":false,"mortgageUrl":"/calculators/bond","affordabilityUrl":"/calculators/affordability","additionalUrl":"/calculators/additionalpayment","costsUrl":"/calculators/bondcosts","isOnListingPage":true},"type":"c"}));
+   </script>
+
+<div data-react-component="Views_Listing_AgentContactViaBrochurePopup" id="9ac77c47bfa64f128e50ba98259bb0fc"></div>
+<script type="application/json" data-props-for="9ac77c47bfa64f128e50ba98259bb0fc">
+    {"defaultContactMessage":"I\u0027m interested in this property, please contact me."}
+</script>
+
+<div data-react-component="Views_Listing_ContactAgentStickyButton" id="85c24457cab542949591d9b6f0dcb839"></div>
+<script type="application/json" data-props-for="85c24457cab542949591d9b6f0dcb839">
+    {"defaultContactMessage":"I\u0027m interested in this property, please contact me."}
+</script>
+
+<div data-react-component="Client_Listing_ImageGalleryRightClickExperiment" id="aa962707613a4062a77d052b4923d1cf"></div>
+<script type="application/json" data-props-for="aa962707613a4062a77d052b4923d1cf">
+    {"enable":true,"experimentKey":"por-39999"}
+</script>
+
+        
+
+            <script type="text/javascript">addCallback(function() {
+                $(".js_ie8_dismiss").on("click", function () {
+                    Property24.Cookies.Set(Property24.Constants.CookieKeys.OldIEUpgradeWarningSeen, 1, { expires: 365 });
+                    $(".js_ie8_message").fadeOut(500);
+                });
+            });</script>
+    </div>
+    <div class="p24_loading js_Loading">
+        <i class="fa fa-3x fa-spin fa-spinner"></i>
+        <img src="/Content/images/Optimized/loading.gif?z=06483dd6d616a2608023" alt="Loading" class="p24_ieLoader" />
+    </div>
+    <div class="modal fade p24_modal" id="globalModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="/Content/images/Optimized/Icons/icon_close_grey.png?z=1cc08bf7b63ad90d18b7" alt="Close" class="p24_close" data-dismiss="modal" aria-label="Close" />
+                            <div class="clearfix"></div>
+                            <div><span class="p24_title">set at runtime</span> - Property24</div>
+                            <div class="p24_devMessage">
+                                set at runtime
+                            </div>
+                            <div class="p24_liveMessage">
+                                set at runtime
+                            </div>
+                            <hr class="p24_margin" />
+                            <a href="javascript:;" class="pull-right btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div data-react-component="Client_Login_LoginModal" id="040fbfc0ad57481f9509bfe7ff2bbad5"></div>
+<script type="application/json" data-props-for="040fbfc0ad57481f9509bfe7ff2bbad5">
+    {"spui":false,"isOAuth2":false,"showPopi":true,"activeTab":0,"enableRecaptcha":true,"state":8,"returnUrl":"/to-rent/table-view/blouberg/western-cape/11589/117661901","registerUrl":"/signup?returnUrl=%2fto-rent%2ftable-view%2fblouberg%2fwestern-cape%2f11589%2f117661901","oAuthLoginUrl":"/oauth2login","forgotPasswordUrl":"/reset-password?returnUrl=%2fto-rent%2ftable-view%2fblouberg%2fwestern-cape%2f11589%2f117661901","termsAndConditionsUrl":"/terms-and-conditions","resendVerificationCodeUrl":"https://www.property24.com/User/ResendVerificationCode","validateVerificationCodeUrl":"https://www.property24.com/User/ValidateVerificationCode","twoStepSetupUrl":"https://manage.property24.com/Country-1/Account/SignIn?returnUrl=https%3a%2f%2fwww.property24.com%2fto-rent%2ftable-view%2fblouberg%2fwestern-cape%2f11589%2f117661901","availableTwoStepMethods":[2,3,4]}
+</script>
+
+
+    <script type="text/javascript">addCallback(function() {
+        var IsDesktopRendered = true;
+        $.validator.methods.email = function(value, element) {
+            var re = /^(\s*)(?![.-])(?:[-a-zA-Z0-9!#$%&*+/=?^_`{|}~.])*(?:[a-zA-Z0-9!#$%&*+/=?^_`{|}~])+@(?:(?!-)[a-zA-Z0-9-]*[a-zA-Z0-9]\.)+[a-zA-Z]{2,}(\s*)$/;
+            return this.optional(element) || re.test(value);
+        };
+    });</script>
+</body>
+</html>
