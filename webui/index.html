@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Property Scraper</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="viz-root">
+<header class="topbar">
+  <h1>Property Scraper</h1>
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="results" class="active">Results</button>
+    <button role="tab" data-tab="chart">Value chart</button>
+    <button role="tab" data-tab="run">Run scrape</button>
+    <button role="tab" data-tab="settings">Settings</button>
+    <button role="tab" data-tab="help">Help</button>
+  </nav>
+  <button id="btnGoal" class="btn small ghost" title="Answer the goal questions again">Change goal</button>
+  <div class="runpick">
+    <label for="runSelect">Run</label>
+    <select id="runSelect"></select>
+    <button id="btnRescore" class="btn small ghost" title="Apply the current Settings (filters, keywords) to this run again. No scraping; saves as a new run.">Re-score</button>
+    <a id="dlJson" class="btn small" href="#" title="The file to upload to Claude">Claude export</a>
+    <a id="dlCsv" class="btn small ghost" href="#">CSV</a>
+  </div>
+</header>
+
+<div id="sessionBanner" class="banner" hidden>
+  Using a goal for <b>this session only</b> (not saved): runs and re-scores use it instead of your saved settings.
+  <button type="button" class="btn small" id="bnSave">Save as my settings</button>
+  <button type="button" class="btn small ghost" id="bnDiscard">Discard</button>
+</div>
+
+<main>
+  <!-- ======================= RESULTS ======================= -->
+  <section id="tab-results" class="tab active">
+    <div id="emptyState" class="empty" hidden>
+      <p>No runs yet. Go to <b>Run scrape</b> and press <b>Start</b>.</p>
+    </div>
+    <div id="oldRunNote" class="note" hidden>This run was made before value scoring existed. Run a new scrape to get scores, fair prices and the value chart.</div>
+    <div class="tiles" id="tiles"></div>
+    <div class="filterbar">
+      <input id="q" type="search" placeholder="Search title, suburb, agency, excerpt…">
+      <span class="sites" id="siteToggles"></span>
+      <label><input type="checkbox" id="hideDupes"> Hide duplicates</label>
+      <label><input type="checkbox" id="showRejected"> Show filtered-out listings</label>
+      <span id="rowCount" class="muted"></span>
+    </div>
+    <div class="tablewrap">
+      <table id="listTable">
+        <thead><tr>
+          <th data-k="score" class="num">Score</th>
+          <th data-k="price" class="num" id="thPrice">Rent</th>
+          <th data-k="value_pct" class="num" title="% cheaper than the fair-price curve predicts">vs market</th>
+          <th data-k="beds" class="num">Beds</th>
+          <th data-k="baths" class="num">Baths</th>
+          <th data-k="size" class="num">m²</th>
+          <th data-k="title">Listing</th>
+          <th data-k="suburb">Suburb</th>
+          <th data-k="available">Available</th>
+          <th data-k="site">Site</th>
+          <th data-k="agency">Agency</th>
+          <th data-k="flags">Notes</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ======================= CHART ======================= -->
+  <section id="tab-chart" class="tab">
+    <div class="charthead">
+      <div>
+        <h2 id="h2Chart1">Rent vs floor size</h2>
+        <p class="muted">Each dot is a listing; the line is the fair-price spline fitted to everything scraped. <b>Dots below the line are cheaper than the market</b>. The shaded band is the sweet spot: the sizes where extra m² cost the least (the dashed line shows how far your budget reaches). Click a dot to open the listing.</p>
+      </div>
+      <label class="muted"><input type="checkbox" id="chartShowAll" checked> Show filtered-out listings (grey)</label>
+    </div>
+    <div class="legend" id="legend1"></div>
+    <div class="chart" id="chart1"></div>
+    <p class="muted small" id="chartNote1"></p>
+
+    <h2 id="h2Chart2">Rent per m²</h2>
+    <p class="muted">Same listings, as rand per square metre. The curve falls as places get bigger. Where it flattens is the sweet spot: past it, more space costs nearly as much per m² as it did before.</p>
+    <div class="legend" id="legend2"></div>
+    <div class="chart" id="chart2"></div>
+    <div id="sweetText" class="callout"></div>
+  </section>
+
+  <!-- ======================= RUN ======================= -->
+  <section id="tab-run" class="tab">
+    <div class="runbox">
+      <div class="runopts">
+        <label><input type="checkbox" id="optNewOnly"> New listings only <span class="muted">(not seen in earlier runs)</span></label>
+        <label><input type="checkbox" id="optDebug"> Save page-1 HTML for debugging</label>
+        <label><input type="checkbox" id="optNoBrowser"> Never use the headless browser fallback</label>
+        <label><input type="checkbox" id="optNoFilters"> Ignore filters (export everything)</label>
+        <label>Max pages per search <input type="number" id="optMaxPages" min="1" max="20" placeholder="config"></label>
+      </div>
+      <div class="runbtns">
+        <button id="btnStart" class="btn">Start scrape</button>
+        <button id="btnStop" class="btn ghost" disabled>Stop</button>
+        <span id="runState" class="pill">idle</span>
+      </div>
+      <p class="muted small">Polite by design: one request at a time, 3–6 s apart. A full run takes 2–3 minutes. If a site returns 403 or a CAPTCHA, that site is skipped and reported, never bypassed.</p>
+      <details>
+        <summary>Searches that will run</summary>
+        <ul id="runSearchList" class="plain"></ul>
+      </details>
+    </div>
+    <pre id="log" class="log" aria-live="polite"></pre>
+  </section>
+
+  <!-- ======================= SETTINGS ======================= -->
+  <section id="tab-settings" class="tab">
+    <form id="settingsForm" autocomplete="off">
+      <fieldset>
+        <legend>What you're looking for (sent to Claude)</legend>
+        <textarea id="notes" rows="4"></textarea>
+      </fieldset>
+
+      <fieldset class="grid">
+        <legend>Filters</legend>
+        <label>Kind <select id="f_kind"><option value="rent">Rent</option><option value="sale">Sale</option><option value="">Any</option></select></label>
+        <label>Min price (R) <input type="number" id="f_min_price" min="0" step="500"></label>
+        <label>Max price (R) <input type="number" id="f_max_price" min="0" step="500"></label>
+        <label>Min beds <input type="number" id="f_min_beds" min="0" step="1"></label>
+        <label>Max beds <input type="number" id="f_max_beds" min="0" step="1"></label>
+        <label>Min size (m²) <input type="number" id="f_min_size_m2" min="0" step="5"></label>
+        <label class="wide"><input type="checkbox" id="f_monthly_price_only"> Drop rentals priced per day/week (holiday lets)</label>
+        <div class="wide">
+          <span class="lbl">Property types</span>
+          <div id="f_types" class="checks"></div>
+        </div>
+        <label class="wide">Include areas <span class="muted">(comma or new line; empty = anywhere)</span>
+          <textarea id="f_include_suburbs" rows="3"></textarea></label>
+        <label class="wide">Exclude areas <textarea id="f_exclude_suburbs" rows="2"></textarea></label>
+        <label class="wide">Exclude keywords <span class="muted">(title/excerpt)</span>
+          <textarea id="f_exclude_keywords" rows="2"></textarea></label>
+      </fieldset>
+
+      <fieldset class="grid">
+        <legend>Value score</legend>
+        <label class="wide">Bonus keywords <span class="muted">(+8 if any appear, e.g. security)</span>
+          <textarea id="s_bonus_keywords" rows="3"></textarea></label>
+        <label class="wide">Red-flag keywords <span class="muted">(−20, scam patterns)</span>
+          <textarea id="s_red_flag_keywords" rows="2"></textarea></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Searches</legend>
+        <p class="muted small">Do a search on the site with your filters, then paste the results-page URL. Supported: <span id="domains"></span>. Gumtree needs a category in the URL, e.g. <code>/property/apartment-flat/table-view?propertyListingType=RENT</code>. Default pages per search: <input type="number" id="maxPages" min="1" max="20" class="tiny">.</p>
+        <table class="searches">
+          <thead><tr><th>On</th><th>Name</th><th>URL</th><th>Pages</th><th></th></tr></thead>
+          <tbody id="searchRows"></tbody>
+        </table>
+        <button type="button" id="addSearch" class="btn ghost small">+ Add search</button>
+      </fieldset>
+
+      <div class="savebar">
+        <button type="submit" class="btn">Save settings</button>
+        <span id="saveMsg"></span>
+      </div>
+    </form>
+  </section>
+
+  <!-- ======================= HELP ======================= -->
+  <section id="tab-help" class="tab prose">
+    <h2>How to use</h2>
+    <ol>
+      <li><b>Settings</b>: describe what you want (this text goes to Claude), set budget, beds and areas, and paste search URLs. Press <b>Save</b>.</li>
+      <li><b>Run scrape</b>: press <b>Start</b> and watch the log. A full run takes 2–3 minutes. Tick <i>New listings only</i> for daily checks.</li>
+      <li><b>Results</b>: listings that pass your filters, best value first. Click a column to sort. <i>Show filtered-out listings</i> shows everything scraped, with the reason each was dropped.</li>
+      <li><b>Value chart</b>: the fair-price spline and the size sweet spot.</li>
+      <li>Changed a filter or keyword? Press <b>Re-score</b> (top right) to apply it to the selected run without scraping again. It saves as a new run.</li>
+      <li>Download the <b>Claude export</b> (top right) and upload it to Claude with something like <i>“Here's my latest property export, give me your shortlist.”</i> The file includes the instructions below, so Claude knows how to read it.</li>
+    </ol>
+    <h3>How the score works</h3>
+    <p><b>Score</b> (0–100) starts at 50, plus how far below the fair price the rent is (±30 max), plus small bonuses for security keywords, parking, availability within 45 days, and being in the sweet spot. Penalties apply for prices more than 40% below market (often scams, typos or rooms) and for scam wording. <b>vs market</b> = how much cheaper (+) or dearer (−) the rent is than the fair-price curve predicts for that size. When the size is unknown, the median rent for that bedroom count is used instead.</p>
+    <h3>What Claude is told</h3>
+    <pre id="interp" class="log light"></pre>
+  </section>
+</main>
+
+<div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+
+<!-- ======================= ONBOARDING ======================= -->
+<div id="onboarding" class="modal" role="dialog" aria-modal="true" aria-labelledby="obTitle" hidden>
+  <div class="modal-card">
+    <div class="ob-head">
+      <h2 id="obTitle">What's your goal?</h2>
+      <div class="ob-progress" id="obProgress"></div>
+      <button type="button" class="ob-close" id="obSkip" title="Close">✕</button>
+    </div>
+
+    <div class="ob-step" data-step="0">
+      <p class="muted">A few quick questions. They set your filters, search URLs, value scoring and the brief Claude gets. You can change all of it later in Settings.</p>
+      <div class="cards">
+        <button type="button" class="choice" data-goal="rent"><b>Rent</b><span>Long-term rental, monthly budget</span></button>
+        <button type="button" class="choice" data-goal="buy"><b>Buy</b><span>Purchase, total price budget</span></button>
+      </div>
+    </div>
+
+    <div class="ob-step" data-step="1">
+      <h3>Budget</h3>
+      <div class="row">
+        <label><span>Max <span id="obPer"></span></span><input type="number" id="obMax" min="0"></label>
+        <label><span>Min <span class="muted">(optional, filters out junk)</span></span><input type="number" id="obMin" min="0"></label>
+      </div>
+      <div class="chips" id="obBudgetPresets"></div>
+      <h3>Bedrooms</h3>
+      <div class="chips" id="obBeds"></div>
+      <h3>Minimum floor size <span class="muted">(optional)</span></h3>
+      <label class="row"><input type="number" id="obSize" min="0" step="5" placeholder="m²"></label>
+    </div>
+
+    <div class="ob-step" data-step="2">
+      <h3>Property type</h3>
+      <div class="chips" id="obTypes"></div>
+    </div>
+
+    <div class="ob-step" data-step="3">
+      <h3>Where?</h3>
+      <div class="cards" id="obRegions"></div>
+      <label class="block">Other areas to include <span class="muted">(comma separated; you'll add a search URL for these in Settings)</span>
+        <input type="text" id="obInclude" placeholder="e.g. Sunningdale, Edgemead"></label>
+      <label class="block">Areas to avoid <input type="text" id="obExclude" placeholder="e.g. Parklands"></label>
+    </div>
+
+    <div class="ob-step" data-step="4">
+      <h3>What matters most?</h3>
+      <p class="muted small">Pick in order of importance; the numbers show your order. Security, pets, parking and transport also add score bonuses when the ad mentions them.</p>
+      <div class="chips" id="obPrios"></div>
+      <h3>Anything else Claude should know?</h3>
+      <textarea id="obExtra" rows="3" placeholder="e.g. I work in Century City and cycle; ground floor preferred; must allow a small dog"></textarea>
+    </div>
+
+    <div class="ob-step" data-step="5">
+      <h3>Review</h3>
+      <ul id="obSummary" class="plain"></ul>
+      <label class="block">Brief for Claude <span class="muted">(edit freely)</span>
+        <textarea id="obNotes" rows="7"></textarea></label>
+      <details><summary id="obSearchesSummary">Searches</summary><ul id="obSearches" class="plain small"></ul></details>
+      <div class="ob-opts">
+        <label><input type="checkbox" id="obReplace" checked> Replace my searches with these</label>
+        <label><input type="checkbox" id="obSave" checked> <b>Save as my settings</b> <span class="muted">(untick to use for this session only)</span></label>
+        <label><input type="checkbox" id="obStart" checked> Start a scrape now</label>
+      </div>
+    </div>
+
+    <p id="obError" class="ob-error" hidden></p>
+    <div class="ob-foot">
+      <button type="button" class="btn ghost" id="obBack">Back</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn" id="obNext">Next</button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/charts.js"></script>
+<script src="/static/app.js"></script>
+<script src="/static/onboarding.js"></script>
+</body>
+</html>
